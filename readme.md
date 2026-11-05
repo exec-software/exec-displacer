@@ -156,7 +156,7 @@ the [MIT License](LICENSE). Bundled third-party materials retain their own
 ## Support the project
 
 You can support Execute Software's work through
-[Buy Me a Coffee](https://www.buymeacoffee.com/execsoftware).
+[Ko-fi](https://ko-fi.com/execsoftware).
 Donations are optional and help fund continued development.
 
 For enterprise licensing and support, contact
