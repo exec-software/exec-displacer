@@ -6,6 +6,16 @@
 #include <math.h>
 #include <stdlib.h>
 
+/* Neither constant is in ISO C; math.h omits them under a strict
+   standard and MSVC needs _USE_MATH_DEFINES. vis.c guards M_PI the
+   same way. */
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+#ifndef M_PI_2
+#define M_PI_2 1.57079632679489661923
+#endif
+
 /* ─── Button ─── */
 static ds_colorf _btn_bg(ds_button_variant v, uint8_t h, uint8_t p) {
   const ds_theme* t = ds_current_theme;
