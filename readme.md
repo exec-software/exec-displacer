@@ -158,3 +158,6 @@ the [MIT License](LICENSE). Bundled third-party materials retain their own
 You can support Execute Software's work through
 [Buy Me a Coffee](https://www.buymeacoffee.com/execsoftware).
 Donations are optional and help fund continued development.
+
+For enterprise licensing and support, contact
+[admin@executesoftware.com](mailto:admin@executesoftware.com).
