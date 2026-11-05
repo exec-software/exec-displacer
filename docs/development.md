@@ -14,8 +14,9 @@ components without the prefab import.
 
 The library build cleans `dist/`, runs TypeScript checking and Vite bundling,
 then writes JavaScript and declarations. Build it before installing or rebuilding
-the showcase's local file dependency. Neither Storybook configuration nor a
-web unit-test suite is currently included, despite the package's script entries.
+the showcase's local file dependency. There is no web unit-test suite and no
+Storybook configuration; the package no longer carries scripts or dependencies
+for either, so `npm run build` is the whole web gate.
 
 Component attributes, properties, and events vary; the source is the reference
 for the currently implemented API. The [component specifications](../spec/components)

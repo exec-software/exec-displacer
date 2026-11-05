@@ -1,7 +1,7 @@
 {
   "name": "libdisplacer-ts",
   "version": "1.0.1",
-  "description": "Displacer Design Language — TypeScript implementation",
+  "description": "Displacer Design Language \u2014 TypeScript implementation",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,10 +22,7 @@
   "scripts": {
     "dev": "vite",
     "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
-    "build": "npm run clean && tsc && vite build",
-    "test": "vitest run",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build": "npm run clean && tsc && vite build"
   },
   "keywords": [
     "displacer",
@@ -39,9 +36,7 @@
     "lit": "^3.3.3"
   },
   "devDependencies": {
-    "@storybook/web-components": "^8.6",
     "typescript": "^5.9.3",
-    "vite": "^6.4.3",
-    "vitest": "^3.2.6"
+    "vite": "^6.4.3"
   }
 }

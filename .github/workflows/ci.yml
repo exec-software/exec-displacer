@@ -73,9 +73,9 @@ jobs:
       - name: Install from the lockfile
         run: npm ci --no-audit --no-fund
         working-directory: lib/libdisplacer-ts
-      # `npm run build` type-checks with tsc and bundles with Vite. The package
-      # also declares `test` and Storybook scripts, but neither a web unit-test
-      # suite nor a Storybook configuration ships in this repository yet.
+      # `npm run build` type-checks with tsc and bundles with Vite, and is the
+      # whole web gate: no web unit-test suite or Storybook configuration ships
+      # here, and the package carries no scripts or dependencies for either.
       - name: Type-check and bundle
         run: npm run build
         working-directory: lib/libdisplacer-ts
