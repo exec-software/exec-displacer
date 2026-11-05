@@ -1,0 +1,17 @@
+[package]
+name = "displacer"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "Displacer design language: Rust bindings for native rendering primitives"
+rust-version = "1.85"
+publish = false
+repository = "https://github.com/exec-software/exec-displacer"
+build = "build.rs"
+
+[lib]
+name = "displacer"
+path = "src/lib.rs"
+
+[build-dependencies]
+cc = "1.4.5"

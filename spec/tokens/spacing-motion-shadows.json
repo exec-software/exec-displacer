@@ -1,0 +1,91 @@
+{
+  "displacer": {
+    "version": "v1",
+    "spacing": {
+      "grid": 4,
+      "scale": {
+        "0": "0px",
+        "1": "4px",
+        "2": "8px",
+        "3": "12px",
+        "4": "16px",
+        "5": "20px",
+        "6": "24px",
+        "8": "32px",
+        "10": "40px",
+        "12": "48px",
+        "16": "64px",
+        "20": "80px",
+        "24": "96px"
+      },
+      "layout": {
+        "maxWidth": "1440px",
+        "contentPadding": "24px",
+        "contentPaddingWide": "48px",
+        "sectionGap": "48px",
+        "componentGap": "16px",
+        "elementGap": "8px"
+      },
+      "breakpoints": {
+        "mobile": "375px",
+        "tablet": "768px",
+        "laptop": "1024px",
+        "desktop": "1280px",
+        "wide": "1440px",
+        "ultrawide": "1920px"
+      }
+    },
+
+    "motion": {
+      "curve": {
+        "snap": "cubic-bezier(0.25, 0.1, 0.25, 1)",
+        "smooth": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "emphasized": "cubic-bezier(0.4, 0, 0, 1)",
+        "decelerate": "cubic-bezier(0, 0, 0.2, 1)",
+        "accelerate": "cubic-bezier(0.4, 0, 1, 1)",
+        "arcane": "cubic-bezier(0.34, 1.56, 0.64, 1)"
+      },
+      "duration": {
+        "instant": "0ms",
+        "fastest": "50ms",
+        "faster": "100ms",
+        "fast": "150ms",
+        "normal": "200ms",
+        "slow": "300ms",
+        "slower": "400ms",
+        "slowest": "600ms",
+        "ritual": "1000ms"
+      },
+      "scale": {
+        "micro": { "duration": "100ms", "curve": "snap" },
+        "compact": { "duration": "150ms", "curve": "smooth" },
+        "standard": { "duration": "200ms", "curve": "smooth" },
+        "expressive": { "duration": "400ms", "curve": "emphasized" },
+        "entrance": { "duration": "300ms", "curve": "decelerate" },
+        "exit": { "duration": "200ms", "curve": "accelerate" },
+        "arcane": { "duration": "600ms", "curve": "arcane" }
+      }
+    },
+
+    "shadows": {
+      "light": {
+        "none": "none",
+        "sm": "0 1px 2px rgba(60, 56, 54, 0.06), 0 1px 3px rgba(60, 56, 54, 0.04)",
+        "md": "0 2px 4px rgba(60, 56, 54, 0.06), 0 4px 8px rgba(60, 56, 54, 0.04)",
+        "lg": "0 4px 8px rgba(60, 56, 54, 0.08), 0 8px 16px rgba(60, 56, 54, 0.06)",
+        "xl": "0 8px 16px rgba(60, 56, 54, 0.08), 0 16px 32px rgba(60, 56, 54, 0.06)",
+        "glow-primary": "0 0 12px rgba(177, 98, 134, 0.25), 0 0 24px rgba(177, 98, 134, 0.1)",
+        "glow-accent": "0 0 12px rgba(214, 93, 14, 0.25), 0 0 24px rgba(214, 93, 14, 0.1)"
+      },
+      "dark": {
+        "none": "none",
+        "sm": "0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.15)",
+        "md": "0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15)",
+        "lg": "0 4px 8px rgba(0, 0, 0, 0.25), 0 8px 16px rgba(0, 0, 0, 0.2)",
+        "xl": "0 8px 16px rgba(0, 0, 0, 0.25), 0 16px 32px rgba(0, 0, 0, 0.2)",
+        "glow-primary": "0 0 12px rgba(177, 98, 134, 0.3), 0 0 24px rgba(177, 98, 134, 0.15)",
+        "glow-accent": "0 0 12px rgba(214, 93, 14, 0.3), 0 0 24px rgba(214, 93, 14, 0.15)"
+      }
+    }
+  }
+}

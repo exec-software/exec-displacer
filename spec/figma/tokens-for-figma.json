@@ -1,0 +1,78 @@
+{
+  "version": "v1",
+  "source": "spec/tokens/colors.json",
+  "platform": "figma",
+  "description": "Displacer design tokens for Figma — import via Design Tokens plugin",
+
+  "global": {
+    "color": {
+      "bg-page-light": { "value": "#fbf1c7", "type": "color" },
+      "bg-page-dark": { "value": "#1d2021", "type": "color" },
+      "bg-surface-light": { "value": "#ebdbb2", "type": "color" },
+      "bg-surface-dark": { "value": "#282828", "type": "color" },
+      "bg-surface-alt-light": { "value": "#d5c4a1", "type": "color" },
+      "bg-surface-alt-dark": { "value": "#3c3836", "type": "color" },
+
+      "fg-default-light": { "value": "#3c3836", "type": "color" },
+      "fg-default-dark": { "value": "#ebdbb2", "type": "color" },
+      "fg-muted-light": { "value": "#7c6f64", "type": "color" },
+      "fg-muted-dark": { "value": "#a89984", "type": "color" },
+
+      "border-default-light": { "value": "#bdae93", "type": "color" },
+      "border-default-dark": { "value": "#504945", "type": "color" },
+      "border-focus": { "value": "#b16286", "type": "color" },
+
+      "primary-default": { "value": "#b16286", "type": "color" },
+      "primary-hover": { "value": "#9d6075", "type": "color" },
+      "primary-active": { "value": "#8a4e64", "type": "color" },
+
+      "accent-default": { "value": "#d65d0e", "type": "color" },
+      "accent-hover": { "value": "#c04f08", "type": "color" },
+      "accent-active": { "value": "#a84306", "type": "color" },
+
+      "semantic-info": { "value": "#458588", "type": "color" },
+      "semantic-success": { "value": "#689d6a", "type": "color" },
+      "semantic-warning": { "value": "#d79921", "type": "color" },
+      "semantic-error": { "value": "#cc241d", "type": "color" },
+
+      "jewel-amethyst": { "value": "#b16286", "type": "color" },
+      "jewel-sapphire": { "value": "#458588", "type": "color" },
+      "jewel-emerald": { "value": "#689d6a", "type": "color" },
+      "jewel-ruby": { "value": "#cc241d", "type": "color" },
+      "jewel-topaz": { "value": "#d79921", "type": "color" },
+      "jewel-citrine": { "value": "#d65d0e", "type": "color" },
+      "jewel-quartz": { "value": "#a89984", "type": "color" }
+    },
+
+    "typography": {
+      "family-display": { "value": "'Averia Serif Libre', Georgia, serif", "type": "fontFamily" },
+      "family-body": { "value": "'Inter', system-ui, sans-serif", "type": "fontFamily" },
+      "family-mono": { "value": "'JetBrains Mono', monospace", "type": "fontFamily" },
+      "weight-regular": { "value": "400", "type": "fontWeight" },
+      "weight-bold": { "value": "700", "type": "fontWeight" }
+    },
+
+    "spacing": {
+      "grid": { "value": "4", "type": "spacing" },
+      "gap-sm": { "value": "8", "type": "spacing" },
+      "gap-md": { "value": "16", "type": "spacing" },
+      "gap-lg": { "value": "24", "type": "spacing" },
+      "gap-xl": { "value": "48", "type": "spacing" }
+    },
+
+    "borderRadius": {
+      "sm": { "value": "4", "type": "borderRadius" },
+      "md": { "value": "8", "type": "borderRadius" },
+      "lg": { "value": "12", "type": "borderRadius" },
+      "xl": { "value": "16", "type": "borderRadius" },
+      "full": { "value": "9999", "type": "borderRadius" }
+    },
+
+    "shadow": {
+      "sm": { "value": "0 1px 2px rgba(60,56,54,0.06), 0 1px 3px rgba(60,56,54,0.04)", "type": "boxShadow" },
+      "md": { "value": "0 2px 4px rgba(60,56,54,0.06), 0 4px 8px rgba(60,56,54,0.04)", "type": "boxShadow" },
+      "lg": { "value": "0 4px 8px rgba(60,56,54,0.08), 0 8px 16px rgba(60,56,54,0.06)", "type": "boxShadow" },
+      "xl": { "value": "0 8px 16px rgba(60,56,54,0.08), 0 16px 32px rgba(60,56,54,0.06)", "type": "boxShadow" }
+    }
+  }
+}

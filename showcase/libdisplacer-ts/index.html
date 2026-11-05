@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Displacer — AI Orchestrator Scaffold</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --ds-bg-page: #0d1117;
+      --ds-bg-surface: #111827;
+      --ds-bg-surface-alt: #1a2233;
+      --ds-bg-raised: #1f2937;
+      --ds-fg-default: #e5e7eb;
+      --ds-fg-muted: #9ca3af;
+      --ds-fg-subtle: #6b7280;
+      --ds-border: #2a3443;
+      --ds-border-muted: #1f2937;
+      --ds-primary: #10a37f;
+      --ds-primary-hover: #0f966f;
+      --ds-accent: #10a37f;
+      --ds-accent-hover: #0f8f6f;
+      --ds-info: #60a5fa;
+      --ds-success: #22c55e;
+      --ds-warning: #f59e0b;
+      --ds-error: #ef4444;
+      --ds-focus-ring: color-mix(in srgb, var(--ds-primary) 45%, transparent);
+      --ds-font: 'Inter', system-ui, sans-serif;
+      --ds-chat-user-bg: color-mix(in srgb, var(--ds-primary) 24%, var(--ds-bg-surface-alt));
+      --ds-chat-user-fg: #f8fafc;
+      --ds-chat-user-border: color-mix(in srgb, var(--ds-primary) 45%, transparent);
+      --ds-chat-assistant-bg: var(--ds-bg-surface);
+      --ds-chat-assistant-border: var(--ds-border);
+      --ds-chat-system-bg: var(--ds-bg-surface-alt);
+      --ds-chat-system-fg: var(--ds-fg-muted);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 1px; }
+
+    body {
+      font-family: var(--ds-font, 'Inter', system-ui, sans-serif);
+      background: var(--ds-bg-page);
+      color: var(--ds-fg-default);
+      overflow: hidden;
+    }
+
+    .app-shell {
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 270px 1fr 340px;
+    }
+
+    .left-rail, .center-panel, .right-rail {
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .left-rail {
+      border-right: 1px solid var(--ds-border);
+      padding: 14px;
+      gap: 10px;
+      background: var(--ds-bg-surface);
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    .left-head {
+      display: grid;
+      gap: 10px;
+      padding: 8px 0 2px;
+    }
+
+    .brand-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand {
+      color: var(--ds-fg-default);
+      font-size: 0.96rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--ds-fg-muted);
+      box-shadow: 0 0 0 4px color-mix(in srgb, transparent 60%, var(--ds-bg-surface-alt));
+    }
+
+    .status-dot-online {
+      background: #10b981;
+    }
+
+    .status-dot-sleeping {
+      background: #f59e0b;
+    }
+
+    .status-dot-offline {
+      background: #ef4444;
+    }
+
+    .left-search,
+    .chat-head,
+    .composer,
+    .right-head,
+    .panel-section,
+    .chat-empty,
+    .left-head {
+      padding: 10px;
+    }
+
+    .left-search {
+      overflow: hidden;
+      padding: 0;
+      border: 1px solid var(--ds-border);
+      border-radius: 10px;
+      background: var(--ds-bg-surface-alt);
+    }
+
+    .left-search input,
+    #composer-input,
+    #model-select,
+    .composer-action,
+    .global-controls select {
+      font: inherit;
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--ds-border);
+      background: var(--ds-bg-page);
+      color: var(--ds-fg-default);
+      padding: 9px 10px;
+      outline: none;
+    }
+
+    .left-search input:focus,
+    #composer-input:focus,
+    #model-select:focus,
+    .composer-action:focus,
+    .global-controls select:focus {
+      border-color: var(--ds-primary);
+      box-shadow: none;
+    }
+
+    .left-search input::placeholder,
+    #composer-input::placeholder { color: var(--ds-fg-muted); }
+
+    .left-panel {
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 2px 0 0;
+    }
+
+    .left-panel-title {
+      font-size: 0.7rem;
+      color: var(--ds-fg-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 2px;
+    }
+
+    .thread-list,
+    .project-list,
+    .quick-menu {
+      flex: 1;
+      overflow: auto;
+      min-height: 0;
+      border-top: 1px solid var(--ds-border);
+      padding-top: 4px;
+    }
+
+    #thread-list { max-height: 320px; }
+    #pinned-conversations { max-height: 130px; }
+
+    .project-list {
+      max-height: 152px;
+      overflow: auto;
+      min-height: 0;
+      border-top: 1px solid var(--ds-border);
+      padding-top: 4px;
+    }
+
+    .project-item {
+      width: 100%;
+      text-align: left;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--ds-fg-default);
+      cursor: pointer;
+      padding: 9px 10px;
+      margin-bottom: 4px;
+      font: inherit;
+    }
+
+    .project-item:hover {
+      background: var(--ds-bg-surface-alt);
+    }
+
+    .project-item.active {
+      background: var(--ds-bg-surface-alt);
+      border-left: 3px solid var(--ds-primary);
+      padding-left: 8px;
+    }
+
+    .project-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 0.83rem;
+      margin-bottom: 2px;
+    }
+
+    .project-count {
+      font-size: 0.67rem;
+      color: var(--ds-fg-subtle);
+      background: var(--ds-bg-surface-alt);
+      border: 1px solid var(--ds-border);
+      border-radius: 999px;
+      padding: 0 6px;
+    }
+
+    .project-description {
+      font-size: 0.68rem;
+      color: var(--ds-fg-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .quick-menu {
+      display: grid;
+      gap: 4px;
+      overflow: auto;
+      min-height: 0;
+      border-top: 1px solid var(--ds-border);
+      padding-top: 4px;
+    }
+
+    .quick-menu-item {
+      width: 100%;
+      text-align: left;
+      border: 1px solid var(--ds-border);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--ds-fg-default);
+      cursor: pointer;
+      padding: 7px 10px;
+      font: inherit;
+      font-size: 0.72rem;
+    }
+
+    .quick-menu-item:hover {
+      background: var(--ds-bg-surface-alt);
+      border-color: var(--ds-primary);
+      color: var(--ds-fg-default);
+    }
+
+    .quick-menu-item.active {
+      border-color: var(--ds-primary);
+      color: var(--ds-primary);
+      background: color-mix(in srgb, var(--ds-primary) 14%, transparent);
+    }
+
+    .thread-item {
+      width: 100%;
+      text-align: left;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--ds-fg-default);
+      cursor: pointer;
+      padding: 10px 11px;
+      margin-bottom: 4px;
+      font: inherit;
+    }
+
+    .thread-item-shell {
+      position: relative;
+    }
+
+    .thread-item-shell > .thread-item {
+      padding-right: 72px;
+    }
+
+    .thread-item-shell > .thread-pin {
+      position: absolute;
+      z-index: 1;
+      top: 8px;
+      right: 8px;
+    }
+
+    .thread-item:hover {
+      background: var(--ds-bg-surface-alt);
+    }
+
+    .thread-empty {
+      color: var(--ds-fg-muted);
+      font-size: 0.8rem;
+      padding: 12px;
+    }
+
+    .thread-item.active {
+      background: var(--ds-bg-surface-alt);
+      border-left: 3px solid var(--ds-primary);
+      padding-left: 8px;
+    }
+
+    .thread-item:focus-visible {
+      position: relative;
+      z-index: 1;
+    }
+
+    .thread-title {
+      font-weight: 600;
+      font-size: 0.88rem;
+      margin-bottom: 3px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .thread-item-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .thread-pin {
+      border: 1px solid var(--ds-border);
+      border-radius: 999px;
+      padding: 0 7px;
+      font: inherit;
+      font-size: 0.62rem;
+      background: transparent;
+      color: var(--ds-fg-subtle);
+      cursor: pointer;
+      min-height: 20px;
+      line-height: 1.5;
+    }
+
+    .thread-pin:hover {
+      color: var(--ds-fg-default);
+      border-color: color-mix(in srgb, var(--ds-border) 45%, var(--ds-fg-default));
+    }
+
+    .thread-pin-badge {
+      cursor: pointer;
+      padding: 0 6px;
+      color: var(--ds-primary);
+      border-color: color-mix(in srgb, var(--ds-primary) 40%, transparent);
+    }
+
+    .thread-pin.pinned {
+      color: var(--ds-primary);
+      border-color: color-mix(in srgb, var(--ds-primary) 60%, transparent);
+    }
+
+    .thread-sub {
+      font-size: 0.72rem;
+      color: var(--ds-fg-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 1px;
+    }
+
+    .chat-head {
+      border-bottom: 1px solid var(--ds-border);
+      gap: 8px;
+      display: flex;
+      flex-direction: column;
+      padding: 12px 14px;
+      background: var(--ds-bg-surface);
+    }
+
+    .chat-head .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .chat-title { font-size: 1rem; font-weight: 600; }
+
+    .muted {
+      color: var(--ds-fg-muted);
+      font-size: 0.74rem;
+    }
+
+    .chat-scroll {
+      flex: 1;
+      padding: 18px 16px 12px;
+      overflow: auto;
+      background: var(--ds-bg-page);
+      position: relative;
+    }
+
+    .chat-empty {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      border: 1px dashed var(--ds-border);
+      color: var(--ds-fg-muted);
+      font-size: 0.85rem;
+      padding: 24px;
+      text-align: center;
+      gap: 10px;
+      justify-items: center;
+      background: var(--ds-bg-surface-alt);
+    }
+
+    .message-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .message-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .message-row ds-model-badge {
+      margin-bottom: 2px;
+    }
+
+    .message-row.assistant ds-model-badge {
+      align-self: flex-start;
+    }
+
+    .message-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    .message-pin {
+      border: 1px solid var(--ds-border);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--ds-fg-muted);
+      padding: 4px 8px;
+      font: inherit;
+      font-size: 0.64rem;
+      cursor: pointer;
+    }
+
+    .message-pin:hover,
+    .message-pin.pinned {
+      color: var(--ds-primary);
+      border-color: color-mix(in srgb, var(--ds-primary) 50%, transparent);
+    }
+
+    .typing-indicator {
+      display: none;
+      align-items: center;
+      padding: 6px 6px 10px 12px;
+      color: var(--ds-fg-muted);
+    }
+
+    .composer {
+      border-top: 1px solid var(--ds-border);
+      padding: 10px 12px 12px;
+      background: var(--ds-bg-surface);
+      position: relative;
+    }
+
+    .composer-wrap {
+      display: grid;
+      gap: 8px;
+    }
+
+    .composer-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    #composer-input {
+      resize: none;
+      min-height: 44px;
+      max-height: 160px;
+      line-height: 1.35;
+      border-radius: 10px;
+      padding-right: 14px;
+    }
+
+    .composer-action {
+      height: 32px;
+      min-width: 36px;
+      padding: 0 10px;
+      border: 1px solid var(--ds-border);
+      background: var(--ds-bg-surface-alt);
+      color: var(--ds-fg-default);
+      border-radius: 8px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.76rem;
+    }
+
+    .composer-action.is-active,
+    .composer-action:hover {
+      border-color: var(--ds-primary);
+      color: var(--ds-primary);
+    }
+
+    #model-select {
+      flex: 1;
+      min-width: 200px;
+      border: 1px solid var(--ds-border);
+      border-radius: 8px;
+      background: var(--ds-bg-page);
+      color: var(--ds-fg-default);
+      padding: 0 9px;
+      height: 32px;
+      min-height: 32px;
+    }
+
+    #model-select:focus {
+      border-color: var(--ds-primary);
+      outline: none;
+    }
+
+    #composer-send {
+      display: flex;
+      min-width: 86px;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .composer-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 18px;
+      color: var(--ds-fg-muted);
+      font-size: 0.72rem;
+      min-height: 18px;
+    }
+
+    .right-rail {
+      border-left: 1px solid var(--ds-border);
+      padding: 12px;
+      gap: 10px;
+      background: var(--ds-bg-surface);
+    }
+
+    .right-head { }
+
+    .section-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ds-fg-muted);
+      margin-bottom: 8px;
+    }
+
+    .panel-section {
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: var(--ds-bg-surface);
+    }
+
+    .small {
+      font-size: 0.7rem;
+    }
+
+    .global-controls button,
+    #composer-send,
+    .composer-action {
+      appearance: none;
+      border-radius: 8px;
+      padding: 5px 9px;
+      font: inherit;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: border-color 120ms ease, background-color 120ms ease;
+    }
+
+    .global-controls button:hover:not(:disabled),
+    .composer-action:hover,
+    #composer-send:hover,
+    #composer-voice.is-active,
+    #composer-access.is-active,
+    .quick-menu-item.active,
+    .left-head ds-button:hover {
+      border-color: var(--ds-primary);
+      color: var(--ds-primary);
+    }
+
+    .theme-btn {
+      position: fixed;
+      right: 14px;
+      top: 14px;
+      z-index: 4;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--ds-border);
+      background: var(--ds-bg-surface);
+      color: var(--ds-fg-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    .global-controls {
+      position: fixed;
+      top: 14px;
+      right: 66px;
+      z-index: 4;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      background: var(--ds-bg-surface);
+      border: 1px solid var(--ds-border);
+      border-radius: 999px;
+      padding: 7px 10px;
+    }
+
+    .global-controls select {
+      border: 1px solid var(--ds-border);
+      border-radius: 8px;
+      padding: 4px 6px;
+      font: inherit;
+      background: var(--ds-bg-surface-alt);
+      color: var(--ds-fg-default);
+      min-width: 124px;
+    }
+
+    .global-controls select:focus {
+      border-color: var(--ds-focus-ring);
+      outline: none;
+    }
+
+    .global-controls button {
+      height: 32px;
+      min-width: 0;
+      font-size: 0.74rem;
+      padding: 0 10px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .thread-list::-webkit-scrollbar,
+    .chat-scroll::-webkit-scrollbar,
+    .project-list::-webkit-scrollbar,
+    .quick-menu::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .thread-list::-webkit-scrollbar-thumb,
+    .chat-scroll::-webkit-scrollbar-thumb,
+    .project-list::-webkit-scrollbar-thumb,
+    .quick-menu::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 999px;
+      border: 2px solid var(--ds-bg-surface);
+    }
+
+    @media (max-width: 1280px) {
+      .app-shell {
+        grid-template-columns: 250px 1fr;
+      }
+
+      .right-rail {
+        display: none;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .app-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .left-rail {
+        display: none;
+      }
+
+      .chat-head,
+      .right-head,
+      .panel-section {
+        border-radius: 9px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-btn" id="theme-toggle" title="Toggle theme">◉</button>
+  <div class="global-controls">
+    <select id="theme-select">
+      <option value="codex-flat">Codex Flat</option>
+      <option value="displacer-light">Displacer Light</option>
+      <option value="displacer-dark">Displacer Dark</option>
+      <option value="dark-arcana">Dark Arcana</option>
+      <option value="parchment">Parchment</option>
+    </select>
+    <select id="locale-select">
+      <option value="en">English</option>
+      <option value="de">Deutsch</option>
+      <option value="ro">Română</option>
+      <option value="ru">Русский</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+    </select>
+  </div>
+
+  <div class="app-shell">
+    <aside class="left-rail">
+      <section class="left-head">
+        <div class="brand-row">
+          <div class="brand">Displacer Chat</div>
+        </div>
+      </section>
+      <section class="left-search">
+        <input id="thread-search" placeholder="Search conversations" />
+      </section>
+      <section class="left-panel">
+        <div class="left-panel-title">Quick menu</div>
+        <div class="quick-menu">
+          <button id="quick-new-chat" class="quick-menu-item active" type="button">New chat</button>
+          <button class="quick-menu-item" type="button">Pull requests</button>
+          <button class="quick-menu-item" type="button">Sites</button>
+          <button class="quick-menu-item" type="button">Scheduled</button>
+          <button class="quick-menu-item" type="button">Plugins</button>
+        </div>
+      </section>
+
+      <section class="left-panel">
+        <div class="left-panel-title">Pinned</div>
+        <div id="pinned-conversations" class="thread-list"></div>
+      </section>
+
+      <section class="left-panel">
+        <div class="left-panel-title">Projects</div>
+        <div id="project-list" class="project-list"></div>
+      </section>
+
+      <section class="left-panel">
+        <div class="left-panel-title">Recent</div>
+        <div id="thread-list" class="thread-list"></div>
+      </section>
+    </aside>
+
+    <main class="center-panel">
+      <header class="chat-head">
+        <div class="top">
+          <div>
+            <div id="active-thread-title" class="chat-title">New conversation</div>
+            <div id="active-thread-summary" class="muted">No source selected</div>
+          </div>
+          <span id="status-dot" class="status-dot status-dot-online" title="Orchestrator online" aria-hidden="true"></span>
+        </div>
+      </header>
+
+      <section class="chat-scroll">
+        <div id="chat-empty" class="chat-empty">
+          <div>Start by typing a message.</div>
+          <ds-model-badge model="qwen3-coder" quant="Q8_0" context="32768"></ds-model-badge>
+          <div class="muted small">
+            Flat, 3-pane orchestrator shell with Displacer components. No gradients, minimal separators.
+          </div>
+        </div>
+        <div id="chat-messages"></div>
+        <div id="typing-indicator" class="typing-indicator">
+          <ds-typing></ds-typing>
+          <span class="muted" style="margin-left: 8px">Assistant composing…</span>
+        </div>
+      </section>
+
+      <section class="composer" id="composer-form">
+        <div class="composer-wrap">
+          <textarea id="composer-input" placeholder="Message the model"></textarea>
+          <div class="composer-controls">
+            <button id="composer-add" class="composer-action" type="button">＋</button>
+            <button id="composer-access" class="composer-action" type="button">Access</button>
+            <select id="model-select"></select>
+            <button id="composer-voice" class="composer-action" type="button" aria-label="Enable voice input">🎤</button>
+            <ds-button id="composer-send" variant="accent" size="md">Send</ds-button>
+          </div>
+          <span id="composer-send-meta" class="muted composer-meta"></span>
+        </div>
+      </section>
+    </main>
+
+    <aside class="right-rail">
+      <section class="right-head panel-section">
+        <div class="section-title">Thread details</div>
+        <div id="right-rail-empty" class="muted">Open a thread to see slideout context.</div>
+        <div id="right-rail-title" class="small"></div>
+        <div id="right-rail-meta" class="muted small"></div>
+        <div id="right-rail-source" class="muted small"></div>
+      </section>
+
+      <section class="panel-section">
+        <div class="section-title">Tasks</div>
+        <div class="muted small">Task panel placeholder for right-side slideouts.</div>
+      </section>
+    </aside>
+  </div>
+
+  <script type="module" src="/src/init.ts"></script>
+</body>
+</html>

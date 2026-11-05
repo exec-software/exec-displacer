@@ -1,0 +1,11 @@
+{
+  "name": "Displacer Design Tokens",
+  "id": "displacer-design-tokens",
+  "version": "1.0.0",
+  "description": "Import Displacer design tokens (colours, typography, spacing) into your Figma project",
+  "main": "code.js",
+  "ui": "ui.html",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": ["figma"]
+}

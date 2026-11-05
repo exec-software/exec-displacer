@@ -1,0 +1,17 @@
+{
+  "name": "displacer-showcase",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --open",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "libdisplacer-ts": "file:../../lib/libdisplacer-ts"
+  },
+  "devDependencies": {
+    "vite": "^6.4.3"
+  }
+}
