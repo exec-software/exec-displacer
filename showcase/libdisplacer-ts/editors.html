@@ -18,13 +18,13 @@
     <section class="section"><h2>Developer source</h2><p>Matrix and Ny highlighting, folding, history, and snippets work locally. A host can connect compiler analysis using UTF-8 byte edits. This standalone showcase has no compiler.</p>
       <div class="settings"><label for="language">Language<select id="language"><option value="matrix">Matrix</option><option value="ny">Ny</option></select></label><label><input id="fixture" type="checkbox"> Enable synthetic analysis fixture</label></div>
       <p id="fixture-note">Fixture off. No semantic language service is connected.</p>
-      <ds-code-editor label="Plugin source"><textarea name="source" aria-label="Plugin source">module example.panel
+      <ds-code-editor label="Plugin source"><textarea name="source" aria-label="Plugin source">book example.panel
 
-fn title() returns text
-    return "A clear signal"
-end fn
+title returns text begin paragraph
+    give "A clear signal"
+end paragraph
 
--- Type fixture and press Ctrl+Space to test the optional fixture.
+!!! Type fixture and press Ctrl+Space to test the optional fixture.
 </textarea></ds-code-editor>
       <div class="meta" id="selection">Selection / waiting</div>
     </section>

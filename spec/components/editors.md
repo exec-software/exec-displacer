@@ -30,7 +30,7 @@ plain-text fallback if editor initialization fails.
 
 ```html
 <ds-code-editor language="matrix" label="Plugin source">
-  <textarea name="source" aria-label="Plugin source">module example.panel</textarea>
+  <textarea name="source" aria-label="Plugin source">book example.panel</textarea>
 </ds-code-editor>
 ```
 
