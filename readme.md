@@ -46,7 +46,8 @@ credentials. To build its static assets, run
 `npm --prefix showcase/libdisplacer-ts run build`.
 
 Open `editors.html` for the optional Matrix/Ny source editor and visual query
-node builder. Import `libdisplacer-ts/editors`, or self-host the built
+node builder, including typed filter/sort/limit pipelines and compatible schema
+1 panels. Import `libdisplacer-ts/editors`, or self-host the built
 `lib/libdisplacer-ts/dist/displacer-editors.js` module with its accompanying
 license notice. Compiler analysis is supplied by the application; these
 controls do not execute source. See the [editor API](spec/components/editors.md)

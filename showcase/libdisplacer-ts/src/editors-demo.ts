@@ -1,9 +1,10 @@
-import { applyTheme, execute, utf16ToByte, byteToUtf16, type AnalysisProvider, type DisplacerCodeEditor, type DisplacerNodeEditor } from 'libdisplacer-ts/editors'
+import { applyTheme, execute, defaultPipelineGraph, defaultQueryGraph, utf16ToByte, byteToUtf16, type AnalysisProvider, type DisplacerCodeEditor, type DisplacerNodeEditor } from 'libdisplacer-ts/editors'
 
 // The demo uses system fonts; hosts can provide the theme's preferred fonts.
 applyTheme({ ...execute, fonts: { body: 'system-ui, sans-serif', display: 'system-ui, sans-serif', heading: 'system-ui, sans-serif', control: 'ui-monospace, monospace', mono: 'ui-monospace, monospace' } })
 const code = document.querySelector<DisplacerCodeEditor>('ds-code-editor')!
 const graph = document.querySelector<DisplacerNodeEditor>('ds-node-editor')!
+graph.setValue(defaultPipelineGraph())
 const selection = document.querySelector('#selection')!
 const fixture: AnalysisProvider = async (request, signal) => {
   // Deliberately synthetic: exercises the adapter contract, never compiler claims.
@@ -31,6 +32,11 @@ const updateSelection = () => { const value = code.getSelection(); selection.tex
 code.addEventListener('ds-change', updateSelection)
 code.addEventListener('ds-selection-change', updateSelection)
 const updateGraph = () => { document.querySelector('#graph-data')!.textContent = JSON.stringify(graph.getValue(), null, 2) }
+document.querySelector<HTMLSelectElement>('#graph-sample')!.addEventListener('change', (event) => {
+  graph.setValue((event.target as HTMLSelectElement).value === '1' ? defaultQueryGraph() : defaultPipelineGraph())
+  document.querySelector('#graph-status')!.textContent = 'Graph / sample loaded · no query executed'
+  updateGraph()
+})
 graph.addEventListener('ds-change', (event) => {
   const detail = (event as CustomEvent).detail
   document.querySelector('#graph-status')!.textContent = detail.valid ? 'Graph / valid · no query executed' : `Graph / ${detail.errors.length} validation issue(s)`

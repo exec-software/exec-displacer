@@ -78,7 +78,7 @@ window, input routing, and presentation layer.
 | Floating window | `layout/float-window.ts` | Draggable web window shell |
 | Developer console | `lib/libdisplacer-ts/src/prefabs/dev-console.ts` | Optional application-backed console and agent UI |
 | Source editor | `lib/libdisplacer-ts/src/editors/code-editor.ts` | Optional CodeMirror Matrix/Ny editor; host-provided compiler analysis, UTF-8 byte edit contract, textarea fallback |
-| Node editor | `lib/libdisplacer-ts/src/editors/node-editor.ts` | Optional accessible three-node read-only query builder; no execution engine |
+| Node editor | `lib/libdisplacer-ts/src/editors/node-editor.ts` | Optional accessible schema 1 query panels and schema 2 typed filter/sort/limit pipelines; no execution engine |
 
 ## Shared services
 

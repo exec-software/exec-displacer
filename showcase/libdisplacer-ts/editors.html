@@ -28,7 +28,8 @@ end paragraph
 </textarea></ds-code-editor>
       <div class="meta" id="selection">Selection / waiting</div>
     </section>
-    <section class="section"><h2>Visual query panel</h2><p>Choose records, filters, and a result limit. The visual controls generate Concord automatically. The supported graph is exactly one trigger → query → display chain; graph editing does not run a query.</p>
+    <section class="section"><h2>Visual query pipeline</h2><p>Choose a source, add filters and an optional sort, then select result rows. Typed ports connect one pipeline in execution order. Schema 1 panels remain supported; editing either graph does not run a query.</p>
+      <div class="settings"><label for="graph-sample">Load synthetic sample<select id="graph-sample"><option value="2">Schema 2 pipeline</option><option value="1">Schema 1 panel</option></select></label></div><p>Changing the sample replaces this in-memory graph. It does not upgrade a saved plugin.</p>
       <ds-node-editor></ds-node-editor>
       <div class="meta" id="graph-status">Graph / valid</div>
       <details><summary>Inspect generated graph data</summary><pre id="graph-data"></pre></details>

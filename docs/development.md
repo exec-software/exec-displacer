@@ -39,8 +39,18 @@ properties, events, UTF-8 byte offset analysis adapter, and query graph. The
 source editor highlights Matrix/Ny and provides local snippets; compiler-backed
 completion, diagnostics, and signatures require a host provider. No editor
 evaluates source or performs deployment. The node editor's visual forms generate
-read-only Concord for a trigger → query → display graph; a host validates,
-authorizes, and compiles the graph separately.
+read-only Concord sources and typed schema 2 filter/sort/limit pipelines; a host
+validates, authorizes, and compiles the graph separately. A required Limit step
+selects rows only after source matching, filters, and stable sorting. Labeled
+request/records ports form one validated path, rendered in edge order.
+
+Schema 1 trigger → query → display graphs remain supported and are never
+implicitly upgraded. Their missing `take` means 25. An application offers an
+explicit server-validated upgrade, then supplies the returned graph through
+`setValue` and updates generated source. `defaultQueryGraph()` still returns
+schema 1; `defaultPipelineGraph()` returns a schema 2 source with skip 0/take 25.
+Adding pipeline steps rewires a linear path in phase order; manual connections,
+removal, and Undo/Redo retain validation feedback for incomplete graphs.
 
 Run the showcase and open `editors.html` to exercise both controls. Its optional
 analysis fixture is explicitly synthetic, operates entirely in memory, and
