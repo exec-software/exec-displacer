@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit'
+import { LitElement, html, svg, css } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { cloneGraph, defaultQueryGraph, makeConcord, parseConcord, validateGraph, type QueryControls, type QueryGraph, type QueryNode, type QueryNodeType } from './model'
 
@@ -8,7 +8,7 @@ export class DisplacerNodeEditor extends LitElement {
     :host{display:block;min-width:0;container-type:inline-size;background:var(--ds-bg-surface,#1a1a1a);color:var(--ds-fg-default,#ece9e5);border:1px solid var(--ds-border,#667581);font:13px/1.7 var(--ds-font-body,system-ui,sans-serif)}
     .toolbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--ds-border-muted,#212121);gap:12px;flex-wrap:wrap}.caption{font:10px var(--ds-font-mono,monospace);text-transform:uppercase;letter-spacing:.08em}.tools{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
     button,select,input,textarea{box-sizing:border-box;font:12px var(--ds-font-control,var(--ds-font-mono,monospace));color:inherit;background:var(--ds-bg-page,#141414);border:1px solid var(--ds-border,#667581);border-radius:0;padding:8px 10px}button{cursor:pointer}button:hover:not(:disabled){color:var(--ds-primary,#f2661a);border-color:var(--ds-primary,#f2661a)}button:disabled{opacity:.5;cursor:default}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--ds-primary,#f2661a);outline-offset:3px}
-    .canvas{position:relative;min-height:180px;padding:40px 20px;background-color:var(--ds-bg-page,#141414);background-image:linear-gradient(var(--ds-border-muted,#212121) 1px,transparent 1px),linear-gradient(90deg,var(--ds-border-muted,#212121) 1px,transparent 1px);background-size:24px 24px}.connections{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;color:var(--ds-primary,#f2661a)}.nodes{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:35px}.node{height:100px;width:100%;max-width:210px;margin:auto;background:var(--ds-bg-raised,#262626);text-align:left;padding:17px;z-index:1}.node.selected{border-color:var(--ds-primary,#f2661a);box-shadow:inset 0 2px var(--ds-primary,#f2661a)}.node small{display:block;margin-bottom:9px;color:var(--ds-fg-muted,#9c9893);font:10px var(--ds-font-mono,monospace)}.node strong{display:block;font:500 18px var(--ds-font-display,system-ui,sans-serif)}.empty-node{font-size:12px;color:var(--ds-fg-muted,#9c9893);padding:25px}
+    .canvas{position:relative;min-height:180px;padding:40px 20px;background-color:var(--ds-bg-page,#141414);background-image:linear-gradient(var(--ds-border-muted,#212121) 1px,transparent 1px),linear-gradient(90deg,var(--ds-border-muted,#212121) 1px,transparent 1px);background-size:24px 24px}.node-area{position:relative}.connections{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;color:var(--ds-primary,#f2661a)}.nodes{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:35px}.node{height:100px;width:100%;max-width:210px;margin:auto;background:var(--ds-bg-raised,#262626);text-align:left;padding:17px;z-index:1}.node.selected{border-color:var(--ds-primary,#f2661a);box-shadow:inset 0 2px var(--ds-primary,#f2661a)}.node small{display:block;margin-bottom:9px;color:var(--ds-fg-muted,#9c9893);font:10px var(--ds-font-mono,monospace)}.node strong{display:block;font:500 18px var(--ds-font-display,system-ui,sans-serif)}.empty-node{font-size:12px;color:var(--ds-fg-muted,#9c9893);padding:25px}
     .panels{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(230px,1fr);border-top:1px solid var(--ds-border-muted,#212121)}.panel{min-width:0;padding:22px}.panel+.panel{border-left:1px solid var(--ds-border-muted,#212121)}h3{font:500 19px var(--ds-font-heading,system-ui,sans-serif);margin:0 0 18px}label{display:block;font:10px var(--ds-font-mono,monospace);text-transform:uppercase;letter-spacing:.07em;color:var(--ds-fg-muted,#9c9893);margin:18px 0 7px}label:first-of-type{margin-top:0}input,textarea,select{width:100%;min-height:38px}textarea{min-height:100px;resize:vertical;line-height:1.7}.hint,.message{font-size:12px;color:var(--ds-fg-muted,#9c9893);line-height:1.8;margin:10px 0}.query{font:11px/1.8 var(--ds-font-mono,monospace);white-space:pre-wrap;overflow-wrap:anywhere;background:var(--ds-bg-page,#141414);padding:12px;margin:16px 0}.row{display:flex;gap:8px;align-items:end}.row>div{flex:1;min-width:0}.row button{flex:none}.edge{display:flex;gap:10px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--ds-border-muted,#212121);padding:10px 0;font:10px var(--ds-font-mono,monospace)}.edge span{overflow-wrap:anywhere}.edge button{padding:4px 8px}.remove{margin-top:20px;color:var(--ds-error,#e05252)}details{margin-top:16px}summary{cursor:pointer;font:11px var(--ds-font-mono,monospace)}.validation{border-top:1px solid var(--ds-border-muted,#212121);padding:11px 15px;color:var(--ds-fg-muted,#9c9893);font-size:12px}.validation.invalid{color:var(--ds-warning,#e3b341)}.validation ul{margin:7px 0;padding-left:20px}.add-types{width:auto;min-height:30px}.status-note{margin-top:14px}
     @container(max-width:600px){.panels{grid-template-columns:1fr}.panel+.panel{border-left:0;border-top:1px solid var(--ds-border-muted,#212121)}.nodes{gap:12px}.node{padding:12px;height:95px}.node strong{font-size:14px}.canvas{padding:25px 12px;min-height:145px}.row{flex-wrap:wrap}.row>div{min-width:110px}.toolbar{align-items:start}}
   `
@@ -19,8 +19,46 @@ export class DisplacerNodeEditor extends LitElement {
   @state() private from = ''
   @state() private to = ''
   @state() private message = ''
+  @state() private lines: Array<{ x1: number; y1: number; x2: number; y2: number }> = []
   private undoStack: QueryGraph[] = []
   private redoStack: QueryGraph[] = []
+  private canvasObserver?: ResizeObserver
+  connectedCallback() {
+    super.connectedCallback()
+    if (this.hasUpdated) void this.updateComplete.then(() => { if (this.isConnected) { this.observeCanvas(); this.measureConnections() } })
+  }
+  firstUpdated() { this.observeCanvas(); this.measureConnections() }
+  updated(changed: Map<string, unknown>) { if (changed.has('value')) this.measureConnections() }
+  disconnectedCallback() { super.disconnectedCallback(); this.canvasObserver?.disconnect(); this.canvasObserver = undefined }
+  private observeCanvas() {
+    this.canvasObserver?.disconnect()
+    if (typeof ResizeObserver === 'undefined') return
+    this.canvasObserver = new ResizeObserver(() => this.measureConnections())
+    this.canvasObserver.observe(this)
+    const area = this.renderRoot.querySelector('.node-area')
+    if (area) this.canvasObserver.observe(area)
+  }
+  private measureConnections() {
+    const area = this.renderRoot.querySelector<HTMLElement>('.node-area')
+    if (!area) return
+    const bounds = area.getBoundingClientRect(), scaleX = bounds.width ? area.clientWidth / bounds.width : 1, scaleY = bounds.height ? area.clientHeight / bounds.height : 1
+    const nodes = new Map(Array.from(this.renderRoot.querySelectorAll<HTMLButtonElement>('.node[data-node-id]'), (node) => [node.dataset.nodeId!, node.getBoundingClientRect()]))
+    // Intersect each node's boundary along the center-to-center direction. A
+    // small gap keeps the arrowhead visible outside the target's opaque button.
+    const endpoint = (node: DOMRect, other: DOMRect) => {
+      const cx = node.x + node.width / 2, cy = node.y + node.height / 2
+      const dx = other.x + other.width / 2 - cx, dy = other.y + other.height / 2 - cy
+      const ratio = dx || dy ? Math.min(dx ? (node.width / 2 + 2) / Math.abs(dx) : Infinity, dy ? (node.height / 2 + 2) / Math.abs(dy) : Infinity) : 0
+      return { x: Math.round((cx + dx * ratio - bounds.x) * scaleX * 100) / 100, y: Math.round((cy + dy * ratio - bounds.y) * scaleY * 100) / 100 }
+    }
+    const next = this.edges().flatMap((edge) => {
+      const from = nodes.get(edge.from), to = nodes.get(edge.to)
+      if (!from || !to) return []
+      const a = endpoint(from, to), b = endpoint(to, from)
+      return [{ x1: a.x, y1: a.y, x2: b.x, y2: b.y }]
+    })
+    if (JSON.stringify(next) !== JSON.stringify(this.lines)) this.lines = next
+  }
   getValue(): QueryGraph { return cloneGraph(this.value) }
   setValue(value: QueryGraph): void {
     let encoded: string
@@ -80,7 +118,7 @@ export class DisplacerNodeEditor extends LitElement {
     const nodes = this.nodes(), edges = this.edges(), selected = nodes.find((node) => node.id === this.selected), errors = validateGraph(this.value)
     const available = !nodes.some((node) => node.type === this.addType)
     return html`<div class="toolbar"><span class="caption">Read-only query panel / 3 node types</span><div class="tools"><select class="add-types" aria-label="Node type to add" .value=${this.addType} @change=${(event: Event) => { this.addType = (event.target as HTMLSelectElement).value as QueryNodeType }}><option value="trigger">Trigger</option><option value="query">Query</option><option value="display">Display</option></select><button type="button" ?disabled=${this.readonly || !available} @click=${this.addNode}>Add node</button><button type="button" ?disabled=${this.readonly || this.undoStack.length === 0} @click=${this.undo}>Undo</button><button type="button" ?disabled=${this.readonly || this.redoStack.length === 0} @click=${this.redo}>Redo</button></div></div>
-    <div class="canvas" role="group" aria-label="Query graph nodes"><svg class="connections" viewBox="0 0 960 180" preserveAspectRatio="none" aria-hidden="true"><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="currentColor"></path></marker></defs>${edges.map((edge) => { const a = nodes.findIndex((node) => node.id === edge.from), b = nodes.findIndex((node) => node.id === edge.to); return a >= 0 && b >= 0 ? html`<line x1=${160 + a * 320 + 80} y1="90" x2=${160 + b * 320 - 80} y2="90" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>` : '' })}</svg><div class="nodes">${nodes.map((node) => html`<button type="button" class="node ${this.selected === node.id ? 'selected' : ''}" aria-pressed=${this.selected === node.id} @click=${() => { this.selected = node.id }}><small>${node.id}</small><strong>${node.type === 'trigger' ? 'On request' : node.type === 'query' ? 'Find records' : node.type === 'display' ? 'Display results' : node.type}</strong></button>`)}</div>${!nodes.length ? html`<p class="empty-node">Add trigger, query, and display nodes to begin.</p>` : ''}</div>
+    <div class="canvas" role="group" aria-label="Query graph nodes"><div class="node-area"><svg class="connections" aria-hidden="true"><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="currentColor"></path></marker></defs>${this.lines.map((line) => svg`<line x1=${line.x1} y1=${line.y1} x2=${line.x2} y2=${line.y2} stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>`)}</svg><div class="nodes">${nodes.map((node) => html`<button type="button" data-node-id=${node.id} class="node ${this.selected === node.id ? 'selected' : ''}" aria-pressed=${this.selected === node.id} @click=${() => { this.selected = node.id }}><small>${node.id}</small><strong>${node.type === 'trigger' ? 'On request' : node.type === 'query' ? 'Find records' : node.type === 'display' ? 'Display results' : node.type}</strong></button>`)}</div></div>${!nodes.length ? html`<p class="empty-node">Add trigger, query, and display nodes to begin.</p>` : ''}</div>
     <div class="panels"><section class="panel">${this.inspector(selected)}${selected ? html`<button type="button" class="remove" ?disabled=${this.readonly} @click=${() => this.removeNode(selected.id)}>Remove selected node</button>` : ''}${this.message ? html`<p class="message" role="status">${this.message}</p>` : ''}</section><section class="panel"><h3>Connections</h3><p class="hint">The supported chain is trigger → query → display.</p>${edges.map((edge, index) => html`<div class="edge"><span>${edge.from} → ${edge.to}</span><button type="button" aria-label=${`Remove connection ${edge.from} to ${edge.to}`} ?disabled=${this.readonly} @click=${() => { const next = this.getValue(); next.edges.splice(index, 1); this.change(next) }}>Remove</button></div>`)}<div class="row"><div><label for="edge-from">From</label><select id="edge-from" .value=${this.from} ?disabled=${this.readonly} @change=${(event: Event) => { this.from = (event.target as HTMLSelectElement).value }}><option value="">Choose node</option>${nodes.map((node) => html`<option value=${node.id}>${node.id}</option>`)}</select></div><div><label for="edge-to">To</label><select id="edge-to" .value=${this.to} ?disabled=${this.readonly} @change=${(event: Event) => { this.to = (event.target as HTMLSelectElement).value }}><option value="">Choose node</option>${nodes.map((node) => html`<option value=${node.id}>${node.id}</option>`)}</select></div><button type="button" ?disabled=${this.readonly} @click=${this.connect}>Connect</button></div><p class="hint status-note">Only the host can preview, compile, install, or deploy a plugin. Editing this graph does not execute it.</p></section></div>
     <div class="validation ${errors.length ? 'invalid' : ''}" role="status" aria-live="polite">${errors.length ? html`<strong>Graph needs attention</strong><ul>${errors.map((error) => html`<li>${error}</li>`)}</ul>` : 'Valid read-only trigger → query → display graph.'}</div>`
   }

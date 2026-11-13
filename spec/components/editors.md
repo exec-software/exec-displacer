@@ -104,6 +104,8 @@ interaction in this slice.
 The inspector and connection panels stack when the component is 600px wide or
 narrower, including inside a split pane on a large viewport. Wider instances
 retain two columns. This uses CSS container queries rather than viewport width.
+SVG connections use the rendered node boundaries and update through a
+ResizeObserver, so arrows stay aligned when a host resizes a split pane.
 
 The default inspector requires no query syntax. Its source dropdown offers all
 records, Universes, boards, or plugins; an optional name filter, board-type
