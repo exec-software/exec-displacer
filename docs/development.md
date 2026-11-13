@@ -14,14 +14,40 @@ components without the prefab import.
 
 The library build cleans `dist/`, runs TypeScript checking and Vite bundling,
 then writes JavaScript and declarations. Build it before installing or rebuilding
-the showcase's local file dependency. There is no web unit-test suite and no
-Storybook configuration; the package no longer carries scripts or dependencies
-for either, so `npm run build` is the whole web gate.
+the showcase's local file dependency. `npm run test:editors` builds the package
+and runs Node tests for the optional editors' Unicode ranges, stale analysis,
+query generation, and graph validation. There is no Storybook configuration
+or general browser unit-test suite; check interactive behavior in the showcase.
 
 Component attributes, properties, and events vary; the source is the reference
 for the currently implemented API. The [component specifications](../spec/components)
 include design targets that may be ahead of the implementation. Accessibility
 and keyboard behavior should be checked in the consuming application.
+
+## Optional browser editors
+
+Import `libdisplacer-ts/editors` to register `ds-code-editor` and
+`ds-node-editor` without the rest of the component library. This optional entry
+includes CodeMirror; ordinary component imports do not. The build also emits
+the standalone `dist/displacer-editors.js` ES module and its accompanying
+`displacer-editors.LICENSE.txt` for applications that serve assets directly.
+Complete notices are embedded in the module and reproduced from the installed,
+locked runtime packages during each build.
+
+The [editor specification](../spec/components/editors.md) defines the public
+properties, events, UTF-8 byte offset analysis adapter, and query graph. The
+source editor highlights Matrix/Ny and provides local snippets; compiler-backed
+completion, diagnostics, and signatures require a host provider. No editor
+evaluates source or performs deployment. The node editor's visual forms generate
+read-only Concord for a trigger → query → display graph; a host validates,
+authorizes, and compiles the graph separately.
+
+Run the showcase and open `editors.html` to exercise both controls. Its optional
+analysis fixture is explicitly synthetic, operates entirely in memory, and
+tests adapter UI rather than a compiler. Supply a native child textarea for
+server-rendered code-editor forms so editing/submission still work before the
+module loads. Avoid loading preferred fonts remotely when the application's
+CSP or offline requirements call for system/self-hosted font stacks.
 
 ## Applying a web theme
 

@@ -32,6 +32,13 @@ its package-local Displacer license, so those notices travel with npm archives.
 
 ## Package dependencies and optional fonts
 
+The optional browser editor bundle includes CodeMirror, Lezer, and their runtime
+dependencies. Its Matrix/Ny syntax adapters derive from Execute Software's MIT
+licensed [Antimatter](https://github.com/exec-software/exec-antimatter). Complete
+versioned notices are in
+[`EDITORS_NOTICES.txt`](lib/libdisplacer-ts/EDITORS_NOTICES.txt), embedded in the
+standalone bundle, and copied beside it as `displacer-editors.LICENSE.txt`.
+
 Lit and the npm/Cargo build and development dependencies are obtained through
 their package managers and retain their respective licenses. Review the actual
 dependency licenses when distributing an application or bundled build.

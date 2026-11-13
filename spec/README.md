@@ -29,6 +29,7 @@ the visual language and its intended interaction patterns.
 - [Table and data grid](components/table.md)
 - [AI chat and agent presence](components/ai-chat.md)
 - [Audio controls](components/audio.md)
+- [Browser source and node editors](components/editors.md)
 
 These specifications describe design targets. The libraries implement different
 subsets of the components and behavior; a listed variant or accessibility target

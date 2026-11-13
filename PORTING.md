@@ -77,6 +77,8 @@ window, input routing, and presentation layer.
 | Canvas | `data/canvas.ts` | WebGL shader canvas; native drawing uses the separate CPU canvas API |
 | Floating window | `layout/float-window.ts` | Draggable web window shell |
 | Developer console | `lib/libdisplacer-ts/src/prefabs/dev-console.ts` | Optional application-backed console and agent UI |
+| Source editor | `lib/libdisplacer-ts/src/editors/code-editor.ts` | Optional CodeMirror Matrix/Ny editor; host-provided compiler analysis, UTF-8 byte edit contract, textarea fallback |
+| Node editor | `lib/libdisplacer-ts/src/editors/node-editor.ts` | Optional accessible three-node read-only query builder; no execution engine |
 
 ## Shared services
 

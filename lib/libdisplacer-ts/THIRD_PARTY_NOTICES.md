@@ -1,5 +1,12 @@
 # Third-party notices
 
+The optional `displacer-editors.js` bundle also includes CodeMirror, Lezer, and
+their runtime dependencies. Complete versioned license texts, including the
+Antimatter language-adapter attribution, are preserved in
+[`EDITORS_NOTICES.txt`](EDITORS_NOTICES.txt). The build reproduces those notices
+inside the editor bundle and in `dist/displacer-editors.LICENSE.txt`. Retain
+the notice file when distributing the standalone asset.
+
 The browser bundle includes code from the following Lit packages. Their source
 headers retain their copyright notices. These packages share the license reproduced
 below. Displacer’s original code is covered by the accompanying [MIT License](LICENSE).

@@ -45,6 +45,13 @@ Vite prints the local preview address. The showcase runs without a backend or
 credentials. To build its static assets, run
 `npm --prefix showcase/libdisplacer-ts run build`.
 
+Open `editors.html` for the optional Matrix/Ny source editor and visual query
+node builder. Import `libdisplacer-ts/editors`, or self-host the built
+`lib/libdisplacer-ts/dist/displacer-editors.js` module with its accompanying
+license notice. Compiler analysis is supplied by the application; these
+controls do not execute source. See the [editor API](spec/components/editors.md)
+and run `npm --prefix lib/libdisplacer-ts run test:editors` for their model tests.
+
 For a browser app using the locally built package:
 
 ```ts
