@@ -101,6 +101,10 @@ editing incomplete graphs, and validation explains why they cannot yet be used.
 Undo/Redo restores graph changes. There is no arbitrary graph engine or drag
 interaction in this slice.
 
+The inspector and connection panels stack when the component is 600px wide or
+narrower, including inside a split pane on a large viewport. Wider instances
+retain two columns. This uses CSS container queries rather than viewport width.
+
 The default inspector requires no query syntax. Its source dropdown offers all
 records, Universes, boards, or plugins; an optional name filter, board-type
 filter for boards, and limit from 1 through 100 generate Concord automatically.
