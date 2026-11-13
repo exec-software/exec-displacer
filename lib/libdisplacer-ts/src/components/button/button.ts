@@ -14,9 +14,9 @@ export class DisplacerButton extends LitElement {
       align-items: center;
       justify-content: center;
       gap: 0.5em;
-      border: 1.5px solid transparent;
-      border-radius: 10px;
-      font-family: 'Inter', system-ui, sans-serif;
+      border: var(--ds-border-width, 1.5px) solid transparent;
+      border-radius: var(--ds-button-radius, 10px);
+      font-family: var(--ds-font-control, var(--ds-font-body, 'Inter', system-ui, sans-serif));
       font-weight: 600;
       cursor: pointer;
       transition: all 0.15s ease;
@@ -36,15 +36,15 @@ export class DisplacerButton extends LitElement {
     }
 
     /* Sizes */
-    .size-sm { height: 28px; padding: 0 12px; font-size: 0.75rem; border-radius: 6px; }
+    .size-sm { height: 28px; padding: 0 12px; font-size: 0.75rem; border-radius: var(--ds-button-radius, 6px); }
     .size-md { height: 36px; padding: 0 16px; font-size: 0.875rem; }
     .size-lg { height: 44px; padding: 0 24px; font-size: 1rem; }
-    .size-xl { height: 52px; padding: 0 32px; font-size: 1.125rem; border-radius: 12px; }
+    .size-xl { height: 52px; padding: 0 32px; font-size: 1.125rem; border-radius: var(--ds-button-radius, 12px); }
 
     /* Variants */
     .variant-primary {
       background: var(--ds-primary, #4f46e5);
-      color: #ecfeff;
+      color: var(--ds-fg-inverse, #ecfeff);
       border-color: var(--ds-primary, #4f46e5);
     }
     .variant-primary:hover {
@@ -56,7 +56,7 @@ export class DisplacerButton extends LitElement {
     }
 
     .variant-accent {
-      background: var(--ds-accent, #10a37f); color: #f8fafc; border-color: var(--ds-accent, #10a37f);
+      background: var(--ds-accent, #10a37f); color: var(--ds-fg-inverse, #f8fafc); border-color: var(--ds-accent, #10a37f);
     }
     .variant-accent:hover {
       background: var(--ds-accent-hover, #0f9f75);
@@ -114,8 +114,8 @@ export class DisplacerButton extends LitElement {
       width: 12px;
       aspect-ratio: 1;
       border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.35);
-      border-top-color: #fff;
+      border: 2px solid color-mix(in srgb, currentColor 35%, transparent);
+      border-top-color: currentColor;
       animation: spin 0.7s linear infinite;
     }
 

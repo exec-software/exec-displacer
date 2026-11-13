@@ -7,11 +7,11 @@ export class DisplacerCard extends LitElement {
   static styles = css`
     :host { display: block; }
     .card {
-      border-radius: 8px;
+      border-radius: var(--ds-card-radius, 8px);
       padding: 16px;
-      border: 1.5px solid var(--ds-border, #bdae93);
+      border: var(--ds-border-width, 1.5px) solid var(--ds-border, #bdae93);
       transition: all 0.15s ease;
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: var(--ds-font-body, 'Inter', system-ui, sans-serif);
     }
     .card-surface { background: var(--ds-bg-surface, #ebdbb2); box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
     .card-raised { background: var(--ds-bg-surface-alt, #f9f5d7); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }

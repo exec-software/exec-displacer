@@ -10,6 +10,7 @@ export class DisplacerInput extends LitElement {
     :host { display: inline-block; width: 100%; }
     .wrapper { display: flex; flex-direction: column; gap: 4px; }
     label {
+      font-family: var(--ds-font-control, var(--ds-font-body, 'Inter', system-ui, sans-serif));
       font-size: 0.8rem; font-weight: 500;
       color: var(--ds-fg-default, #3c3836);
     }
@@ -22,15 +23,15 @@ export class DisplacerInput extends LitElement {
     }
     input {
       width: 100%;
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: var(--ds-font-body, 'Inter', system-ui, sans-serif);
       background: var(--ds-bg-surface, #ebdbb2);
       color: var(--ds-fg-default, #3c3836);
-      border: 1.5px solid var(--ds-border, #bdae93);
-      border-radius: 6px;
+      border: var(--ds-border-width, 1.5px) solid var(--ds-border, #bdae93);
+      border-radius: var(--ds-control-radius, 6px);
       outline: none;
       transition: all 0.15s ease;
     }
-    input:focus { border-color: var(--ds-focus-ring, #b16286); box-shadow: 0 0 0 2px rgba(177,98,134,0.15); }
+    input:focus { border-color: var(--ds-focus-ring, #b16286); box-shadow: 0 0 0 2px color-mix(in srgb, var(--ds-focus-ring, #b16286) 15%, transparent); }
     input::placeholder { color: var(--ds-fg-muted, #7c6f64); opacity: 0.7; }
     .status-error input { border-color: #cc241d; }
     .status-error input:focus { box-shadow: 0 0 0 2px rgba(204,36,29,0.15); }

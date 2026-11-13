@@ -97,7 +97,7 @@ export class DisplacerUserAvatar extends LitElement {
     :host { display: inline-flex; align-items: center; gap: 8px; font-family: 'Inter', system-ui, sans-serif; }
     .avatar {
       width: var(--size, 32px); height: var(--size, 32px); border-radius: 50%;
-      background: var(--ds-primary, #b16286); color: #fff;
+      background: var(--ds-primary, #b16286); color: var(--ds-fg-inverse, #fff);
       display: flex; align-items: center; justify-content: center;
       font-weight: 700; font-size: calc(var(--size, 32px) * 0.4);
       flex-shrink: 0; overflow: hidden;

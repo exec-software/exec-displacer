@@ -15,8 +15,8 @@ export class DisplacerChatBubble extends LitElement {
       background: var(--ds-bg-surface-alt, #1f2937);
       border: 1px solid var(--ds-border, #334155);
     }
-    .avatar.user { background: var(--ds-primary, #4f46e5); border-color: color-mix(in srgb, var(--ds-primary, #4f46e5) 65%, transparent); }
-    .avatar.assistant { background: var(--ds-accent, #10a37f); border-color: color-mix(in srgb, var(--ds-accent, #10a37f) 70%, transparent); }
+    .avatar.user { color: var(--ds-fg-inverse, #f8fafc); background: var(--ds-primary, #4f46e5); border-color: color-mix(in srgb, var(--ds-primary, #4f46e5) 65%, transparent); }
+    .avatar.assistant { color: var(--ds-fg-inverse, #f8fafc); background: var(--ds-accent, #10a37f); border-color: color-mix(in srgb, var(--ds-accent, #10a37f) 70%, transparent); }
     .bubble {
       padding: 10px 12px 12px;
       border-radius: 8px;

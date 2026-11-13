@@ -74,5 +74,50 @@
       "lg": { "value": "0 4px 8px rgba(60,56,54,0.08), 0 8px 16px rgba(60,56,54,0.06)", "type": "boxShadow" },
       "xl": { "value": "0 8px 16px rgba(60,56,54,0.08), 0 16px 32px rgba(60,56,54,0.06)", "type": "boxShadow" }
     }
+  },
+
+  "execute": {
+    "color": {
+      "bg-page": {"value": "#07090b", "type": "color"},
+      "bg-surface": {"value": "#0d1115", "type": "color"},
+      "bg-surface-alt": {"value": "#141a1f", "type": "color"},
+      "bg-raised": {"value": "#171e24", "type": "color"},
+      "fg-default": {"value": "#edf2f5", "type": "color"},
+      "fg-muted": {"value": "#7b8790", "type": "color"},
+      "fg-subtle": {"value": "#667581", "type": "color"},
+      "fg-inverse": {"value": "#07090b", "type": "color"},
+      "border-default": {"value": "#667581", "type": "color"},
+      "border-muted": {"value": "#202830", "type": "color"},
+      "border-focus": {"value": "#b8ff3d", "type": "color"},
+      "primary-default": {"value": "#b8ff3d", "type": "color"},
+      "primary-hover": {"value": "#cbff73", "type": "color"},
+      "primary-active": {"value": "#daff9c", "type": "color"},
+      "primary-muted": {"value": "rgba(184, 255, 61, 0.14)", "type": "color"},
+      "accent-default": {"value": "#edf2f5", "type": "color"},
+      "accent-hover": {"value": "#ffffff", "type": "color"},
+      "accent-active": {"value": "#d8e2e8", "type": "color"},
+      "accent-muted": {"value": "rgba(237, 242, 245, 0.08)", "type": "color"},
+      "semantic-info": {"value": "#8ac9e8", "type": "color"},
+      "semantic-success": {"value": "#8ddb9a", "type": "color"},
+      "semantic-warning": {"value": "#ffb547", "type": "color"},
+      "semantic-error": {"value": "#ff7d87", "type": "color"},
+      "jewel-amethyst": {"value": "#b8ff3d", "type": "color"},
+      "jewel-sapphire": {"value": "#8ac9e8", "type": "color"},
+      "jewel-emerald": {"value": "#8ddb9a", "type": "color"},
+      "jewel-ruby": {"value": "#ff7d87", "type": "color"},
+      "jewel-topaz": {"value": "#ffb547", "type": "color"},
+      "jewel-citrine": {"value": "#6e9a29", "type": "color"},
+      "jewel-quartz": {"value": "#7b8790", "type": "color"}
+    },
+
+    "typography": {
+      "family-display": {"value": "'Space Grotesk', Arial, sans-serif", "type": "fontFamily"},
+      "family-heading": {"value": "'Space Grotesk', Arial, sans-serif", "type": "fontFamily"},
+      "family-body": {"value": "'Space Grotesk', Arial, sans-serif", "type": "fontFamily"},
+      "family-control": {"value": "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace", "type": "fontFamily"},
+      "family-mono": {"value": "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace", "type": "fontFamily"},
+      "weight-regular": {"value": "400", "type": "fontWeight"},
+      "weight-medium": {"value": "500", "type": "fontWeight"}
+    }
   }
 }

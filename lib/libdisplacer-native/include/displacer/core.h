@@ -88,8 +88,9 @@ extern const ds_theme DS_THEME_DARK_ARCANA;
 extern const ds_theme DS_THEME_PARCHMENT;
 extern const ds_theme DS_THEME_MYSTIC;
 extern const ds_theme DS_THEME_CLAY;
+extern const ds_theme DS_THEME_EXECUTE;
 
-#define DS_THEME_COUNT 6
+#define DS_THEME_COUNT 7
 
 /* Currently active theme; starts as DS_THEME_CLAY, Displacer's default */
 extern const ds_theme* ds_current_theme;

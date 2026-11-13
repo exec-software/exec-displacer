@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Execute — Displacer theme</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:var(--ds-bg-page,#07090B);color:var(--ds-fg-default,#EDF2F5);font:16px/1.55 var(--ds-font-body,Arial,sans-serif)}
+    a{color:inherit}a:focus-visible,select:focus-visible{outline:2px solid var(--ds-primary);outline-offset:5px}
+    .shell{max-width:1440px;margin:auto;padding:0 48px}.mono{font:11px/1.5 var(--ds-font-mono,monospace);letter-spacing:.12em;text-transform:uppercase}
+    header{border-bottom:1px solid var(--ds-border-muted);padding:28px 0}.header{display:flex;justify-content:space-between;align-items:center;gap:24px}.brand{display:flex;align-items:center;gap:15px;text-decoration:none}.mark{border:1px solid var(--ds-border);padding:3px 10px;font:500 24px var(--ds-font-mono);border-right:4px solid var(--ds-primary)}
+    .header-tools{display:flex;align-items:center;gap:16px}.header-tools a{color:var(--ds-fg-muted);text-decoration:none}select{padding:8px 14px;background:var(--ds-bg-surface);color:var(--ds-fg-default);border:1px solid var(--ds-border);font:12px var(--ds-font-mono)}
+    .hero{padding:90px 0 66px;background-image:linear-gradient(to right,var(--ds-border-muted) 1px,transparent 1px);background-size:calc(100% / 12) 100%}
+    .eyebrow{display:flex;align-items:center;gap:16px;color:var(--ds-fg-muted)}.eyebrow:before{content:'';width:7px;height:7px;background:var(--ds-primary);border-radius:50%}
+    h1{font:500 clamp(52px,6.8vw,100px)/1 var(--ds-font-display,Arial,sans-serif);letter-spacing:-.045em;margin:30px 0}h1 span{color:var(--ds-primary)}.intro{max-width:590px;color:var(--ds-fg-muted);font-size:18px}.hero-meta{display:flex;gap:26px;margin-top:32px;color:var(--ds-fg-muted)}
+    .section{padding:44px 0;border-top:1px solid var(--ds-border-muted)}.section-heading{display:flex;justify-content:space-between;gap:20px;align-items:baseline;margin-bottom:26px}.section-heading h2{font:500 24px var(--ds-font-heading);margin:0;letter-spacing:-.03em}.section-heading span{color:var(--ds-fg-muted)}
+    .controls{display:grid;grid-template-columns:1fr 1fr;gap:32px}.panel{background:var(--ds-bg-surface);padding:30px;border:1px solid var(--ds-border-muted)}.panel-label{color:var(--ds-fg-muted);margin-bottom:22px}.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.fields{display:grid;gap:24px;margin-top:28px}.fields ds-input{max-width:420px}.stack{display:grid;gap:18px}.status{font-family:var(--ds-font-mono);font-size:12px;color:var(--ds-success)}
+    .swatches{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--ds-border-muted);border-left:1px solid var(--ds-border-muted)}.swatch{padding:18px;border-right:1px solid var(--ds-border-muted);border-bottom:1px solid var(--ds-border-muted)}.chip{height:70px;border:1px solid var(--ds-border);margin-bottom:18px}.swatch p{margin:3px 0;color:var(--ds-fg-muted)}.signal{background:var(--ds-primary)}.canvas{background:var(--ds-bg-page)}.surface{background:var(--ds-bg-surface)}.raised{background:var(--ds-bg-raised)}.ink{background:var(--ds-fg-default)}.warning{background:var(--ds-warning)}
+    footer{padding:28px 0 36px;border-top:1px solid var(--ds-border-muted);color:var(--ds-fg-muted)}footer .shell{display:flex;justify-content:space-between;gap:20px}
+    @media(max-width:850px){.shell{padding:0 24px}.hero{padding:64px 0 48px}.controls{grid-template-columns:1fr}.swatches{grid-template-columns:repeat(3,1fr)}.header-tools a{display:none}}
+    @media(max-width:480px){.shell{padding:0 20px}.header{align-items:flex-start;flex-direction:column}.hero-meta{flex-direction:column;gap:6px}.swatches{grid-template-columns:repeat(2,1fr)}.section-heading{align-items:flex-start;flex-direction:column;gap:8px}.panel{padding:22px}footer .shell{flex-direction:column}h1{font-size:52px}}
+  </style>
+</head>
+<body>
+  <header><div class="shell header"><a class="brand mono" href="#"><span class="mark" aria-hidden="true">E</span>Execute Software</a><div class="header-tools"><a class="mono" href="#controls">Controls</a><a class="mono" href="#palette">Palette</a><label class="mono" for="theme">Theme</label><select id="theme"><option value="execute">Execute</option><option value="displacer-dark">Displacer Dark</option></select></div></div></header>
+  <main class="shell">
+    <section class="hero"><div class="eyebrow mono">Displacer / Public product theme</div><h1>Structure. Clarity.<br><span>A clear signal.</span></h1><p class="intro">The Execute identity for product interfaces. Precise dark surfaces, bright lime signals, and a modern typographic system.</p><div class="hero-meta mono"><span>Space Grotesk + IBM Plex Mono</span><span>Theme ID / execute</span></div></section>
+    <section id="controls" class="section"><div class="section-heading"><h2>Built from the same system.</h2><span class="mono">01 / Components</span></div><div class="controls">
+      <div class="panel"><div class="mono panel-label">Actions + inputs</div><div class="row"><ds-button>Primary action</ds-button><ds-button variant="accent">Secondary</ds-button><ds-button variant="outline">Outline</ds-button></div><div class="fields"><ds-input label="Workspace name" placeholder="Your workspace"></ds-input><ds-input label="Connection" value="Ready to connect" status="success" hint="Semantic states retain their meaning."></ds-input></div></div>
+      <div class="stack"><ds-card><span slot="title">A modern foundation.</span>Near-black surfaces and measured contrast give work room to breathe.<span slot="actions" class="status">SYSTEM / READY</span></ds-card><ds-card variant="raised"><span slot="title">Signal with purpose.</span>Lime identifies actions and focus. Neutral ink supports secondary actions; amber remains a warning.<span slot="actions" class="mono">No assets or fonts are bundled</span></ds-card></div>
+    </div></section>
+    <section id="palette" class="section"><div class="section-heading"><h2>One unmistakable signal.</h2><span class="mono">02 / Color roles</span></div><div class="swatches">
+      <div class="swatch mono"><div class="chip canvas"></div>Canvas<p>#07090B</p></div><div class="swatch mono"><div class="chip surface"></div>Surface<p>#0D1115</p></div><div class="swatch mono"><div class="chip raised"></div>Raised<p>#171E24</p></div><div class="swatch mono"><div class="chip signal"></div>Signal<p>#B8FF3D</p></div><div class="swatch mono"><div class="chip ink"></div>Ink<p>#EDF2F5</p></div><div class="swatch mono"><div class="chip warning"></div>Warning<p>#FFB547</p></div>
+    </div></section>
+  </main><footer class="mono"><div class="shell"><span>Execute / Displacer</span><span>Based on executesoftware.com</span></div></footer>
+  <script type="module" src="/src/execute.ts"></script>
+</body>
+</html>

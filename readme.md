@@ -124,7 +124,7 @@ font input. See the [development guide](docs/development.md) for details.
 
 ## Themes
 
-Native palettes include Clay, Light, Dark, Dark Arcana, Parchment, and Mystic.
+Native palettes include Clay, Light, Dark, Dark Arcana, Parchment, Mystic, and Execute.
 [Clay](spec/themes/clay.md) is the default native palette and the web token
 `defaultTheme`; [Mystic](spec/themes/mystic.md) offers a graphite and violet palette.
 The web theme registry has its own set of presets. Set a web theme explicitly:
@@ -134,6 +134,14 @@ components have CSS fallback colors.
 [Clay Light](spec/themes/clay-light.md) provides a warm-white counterpart to Clay.
 It is available as web tokens (`colors['clay-light']`) and the `clayLight` theme
 manifest. It does not currently have a native C or Rust built-in palette.
+
+[Execute](spec/themes/execute.md) brings the corporate website's charcoal,
+off-white, and lime engineering palette into application UI. Web consumers can
+import the `execute` theme manifest and register/apply it under the ID `execute`;
+raw colors are available as `colors.execute`. Native C uses `DS_THEME_EXECUTE`,
+and Rust uses `BuiltinTheme::Execute`. Execute is opt-in; Clay remains the
+default. See the [theme guide](docs/development.md#execute-theme) for examples
+and font setup.
 
 ## Versioning
 

@@ -48,7 +48,7 @@
     :focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 1px; }
 
     body {
-      font-family: var(--ds-font, 'Inter', system-ui, sans-serif);
+      font-family: var(--ds-font-body, var(--ds-font, 'Inter', system-ui, sans-serif));
       background: var(--ds-bg-page);
       color: var(--ds-fg-default);
       overflow: hidden;
@@ -719,7 +719,8 @@
   <button class="theme-btn" id="theme-toggle" title="Toggle theme">◉</button>
   <div class="global-controls">
     <select id="theme-select">
-      <option value="codex-flat">Codex Flat</option>
+      <option value="execute">Execute</option>
+                <option value="codex-flat">Codex Flat</option>
       <option value="displacer-light">Displacer Light</option>
       <option value="displacer-dark">Displacer Dark</option>
       <option value="dark-arcana">Dark Arcana</option>

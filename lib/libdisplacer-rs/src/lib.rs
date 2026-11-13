@@ -183,6 +183,7 @@ mod ffi {
         pub static DS_THEME_PARCHMENT: DsTheme;
         pub static DS_THEME_MYSTIC: DsTheme;
         pub static DS_THEME_CLAY: DsTheme;
+        pub static DS_THEME_EXECUTE: DsTheme;
 
         #[cfg(test)]
         pub fn ds_lang_init();
@@ -285,6 +286,8 @@ pub enum BuiltinTheme {
     /// Flat charcoal surfaces with a ZBrush-orange primary and teal accent; the default.
     #[default]
     Clay,
+    /// Execute Software's cool near-black surfaces and lime action accent.
+    Execute,
 }
 
 impl BuiltinTheme {
@@ -296,6 +299,7 @@ impl BuiltinTheme {
             Self::Parchment => &raw const ffi::DS_THEME_PARCHMENT,
             Self::Mystic => &raw const ffi::DS_THEME_MYSTIC,
             Self::Clay => &raw const ffi::DS_THEME_CLAY,
+            Self::Execute => &raw const ffi::DS_THEME_EXECUTE,
         }
     }
 
@@ -1292,6 +1296,62 @@ mod tests {
         assert_eq!(palette.foreground, 0x4a3728);
         assert_eq!(palette.jewels[0], palette.primary);
         assert_eq!(BuiltinTheme::Dark.palette().page, 0x1d2021);
+    }
+
+    #[test]
+    fn execute_palette_is_available_through_native_and_rust_contexts() {
+        let (_guard, mut context) = context();
+        assert_eq!(BuiltinTheme::default(), BuiltinTheme::Clay);
+        context.set_theme(BuiltinTheme::Execute);
+        assert_eq!(context.current_theme(), BuiltinTheme::Execute);
+        let palette = context.current_palette();
+        assert_eq!(
+            palette,
+            Palette {
+                page: 0x07090b,
+                surface: 0x0d1115,
+                surface_alt: 0x141a1f,
+                raised: 0x171e24,
+                foreground: 0xedf2f5,
+                foreground_muted: 0x7b8790,
+                foreground_subtle: 0x667581,
+                border: 0x667581,
+                border_muted: 0x202830,
+                primary: 0xb8ff3d,
+                primary_hover: 0xcbff73,
+                accent: 0xedf2f5,
+                accent_hover: 0xffffff,
+                info: 0x8ac9e8,
+                success: 0x8ddb9a,
+                warning: 0xffb547,
+                error: 0xff7d87,
+                jewels: [
+                    0xb8ff3d, 0x8ac9e8, 0x8ddb9a, 0xff7d87, 0xffb547, 0x6e9a29, 0x7b8790
+                ],
+            }
+        );
+        for tier in [
+            palette.page,
+            palette.surface,
+            palette.surface_alt,
+            palette.raised,
+        ] {
+            assert!(contrast_ratio(palette.foreground, tier) >= 12.0);
+            assert!(contrast_ratio(palette.border, tier) >= 3.0);
+            for role in [
+                palette.primary,
+                palette.accent,
+                palette.info,
+                palette.success,
+                palette.warning,
+                palette.error,
+            ] {
+                assert!(contrast_ratio(role, tier) >= 4.5);
+            }
+        }
+        let applied = unsafe { ffi::ds_current_theme };
+        assert_eq!(unsafe { (*applied).page }, palette.page);
+        assert_eq!(unsafe { (*applied).primary }, palette.primary);
     }
 
     #[test]

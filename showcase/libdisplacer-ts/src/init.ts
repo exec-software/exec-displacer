@@ -1,4 +1,4 @@
-import { themeRegistry, displacerLight, displacerDark, darkArcana, parchment, codexFlat } from "../../../lib/libdisplacer-ts/src/theme/index.ts"
+import { themeRegistry, displacerLight, displacerDark, darkArcana, parchment, codexFlat, execute } from "../../../lib/libdisplacer-ts/src/theme/index.ts"
 import '../../../lib/libdisplacer-ts/src/components/index.ts'
 import { setLocale, detectLocale } from '../../../lib/libdisplacer-ts/src/translations/index.ts'
 import { mountOrchestratorChatDemo } from './chat-app'
@@ -8,6 +8,7 @@ themeRegistry.register(displacerDark)
 themeRegistry.register(darkArcana)
 themeRegistry.register(parchment)
 themeRegistry.register(codexFlat)
+themeRegistry.register(execute)
 
 const saved = localStorage.getItem("ds-active-theme")
 const initialTheme = saved && themeRegistry.get(saved) ? saved : "codex-flat"
@@ -23,7 +24,7 @@ if (localeSelect) localeSelect.value = locale
 
 document.getElementById("theme-toggle")?.addEventListener("click", () => {
   const sel = document.getElementById("theme-select") as HTMLSelectElement
-  const themes = ["codex-flat", "displacer-dark", "displacer-light", "dark-arcana", "parchment"]
+  const themes = ["execute", "codex-flat", "displacer-dark", "displacer-light", "dark-arcana", "parchment"]
   const next = themes[(themes.indexOf(sel.value) + 1) % themes.length]
   sel.value = next
   themeRegistry.apply(next)

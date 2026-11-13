@@ -48,7 +48,7 @@ export class DisplacerNav extends LitElement {
       display: inline-flex; align-items: center;
     }
     ::slotted(.nav-item:hover) { background: var(--ds-primary-muted, rgba(177,98,134,0.08)); color: var(--ds-primary, #b16286); }
-    ::slotted(.nav-item.active) { background: var(--ds-primary, #b16286); color: #fbf1c7; border-radius: 6px; }
+    ::slotted(.nav-item.active) { background: var(--ds-primary, #b16286); color: var(--ds-fg-inverse, #fbf1c7); border-radius: var(--ds-control-radius, 6px); }
 
     /* Tabs variant */
     .nav-tabs {

@@ -19,3 +19,19 @@ if(UNIX)
   target_link_libraries(displacer_vis_scanline_test PRIVATE m)
 endif()
 add_test(NAME displacer_vis_scanline_test COMMAND displacer_vis_scanline_test)
+
+add_executable(displacer_theme_test theme_test.c)
+target_link_libraries(displacer_theme_test PRIVATE displacer)
+set_target_properties(
+  displacer_theme_test
+  PROPERTIES C_STANDARD 17 C_STANDARD_REQUIRED YES C_EXTENSIONS NO
+)
+if(MSVC)
+  target_compile_options(displacer_theme_test PRIVATE /W4 /WX)
+else()
+  target_compile_options(
+    displacer_theme_test
+    PRIVATE -Wall -Wextra -Wpedantic -Werror
+  )
+endif()
+add_test(NAME displacer_theme_test COMMAND displacer_theme_test)

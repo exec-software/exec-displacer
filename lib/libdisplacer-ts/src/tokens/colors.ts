@@ -44,9 +44,18 @@ export const colors = {
     semantic: { info: '#3266a0', success: '#337146', warning: '#84600c', error: '#b63838' },
     jewel: { amethyst: '#9d4211', sapphire: '#376389', emerald: '#3a6845', ruby: '#a13b3b', topaz: '#745b21', citrine: '#1e6a60', quartz: '#625e5a' },
   },
+  execute: {
+    bg: { page: '#07090B', surface: '#0D1115', 'surface-alt': '#141A1F', raised: '#171E24' },
+    fg: { default: '#EDF2F5', muted: '#7B8790', subtle: '#667581', inverse: '#07090B' },
+    border: { default: '#667581', muted: '#202830', focus: '#B8FF3D' },
+    primary: { default: '#B8FF3D', hover: '#CBFF73', active: '#DAFF9C', muted: 'rgba(184,255,61,0.14)' },
+    accent: { default: '#EDF2F5', hover: '#FFFFFF', active: '#D8E2E8', muted: 'rgba(237,242,245,0.08)' },
+    semantic: { info: '#8AC9E8', success: '#8DDB9A', warning: '#FFB547', error: '#FF7D87' },
+    jewel: { amethyst: '#B8FF3D', sapphire: '#8AC9E8', emerald: '#8DDB9A', ruby: '#FF7D87', topaz: '#FFB547', citrine: '#6E9A29', quartz: '#7B8790' },
+  },
 } as const
 
-export type DisplacerTheme = 'light' | 'dark' | 'mystic' | 'clay' | 'clay-light'
+export type DisplacerTheme = keyof typeof colors
 export type DisplacerColor = typeof colors.light
 
 /** Displacer's default theme, for products without a saved theme preference. */

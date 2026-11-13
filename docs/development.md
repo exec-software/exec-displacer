@@ -46,6 +46,50 @@ avoid that request. The registry starts empty; register presets before using
 The Observatory preset is exported as `observatory`, with the registry ID
 `observatory`. It combines parchment surfaces with blue research accents.
 
+### Execute theme
+
+[Execute](../spec/themes/execute.md) is the opt-in corporate engineering theme.
+It is exported from `libdisplacer-ts` and `libdisplacer-ts/theme` as `execute`,
+with registry ID `execute`; `libdisplacer-ts/tokens` exports its palette as
+`colors.execute`. Register and apply it explicitly:
+
+```ts
+import { execute, themeRegistry } from 'libdisplacer-ts/theme'
+
+// Supply these fonts locally to avoid the preset's Google Fonts request.
+themeRegistry.register({
+  ...execute,
+  fonts: {
+    display: '"Space Grotesk", Arial, sans-serif',
+    heading: '"Space Grotesk", Arial, sans-serif',
+    body: '"Space Grotesk", Arial, sans-serif',
+    control: '"IBM Plex Mono", ui-monospace, monospace',
+    mono: '"IBM Plex Mono", ui-monospace, monospace',
+  },
+})
+themeRegistry.apply('execute')
+```
+
+Use Space Grotesk at weights 400 and 500 for content and headings; use IBM Plex
+Mono at the same weights for technical labels, controls, and metadata. Naming a
+font does not provide its files. Supply licensed font files or use the fallback
+stacks. Applying the unmodified `execute` preset instead includes the optional
+Google Fonts stylesheet. Native C and Rust palette selection changes colors;
+applications supply fonts and apply the type and layout guidance themselves.
+
+For native C, include `<displacer/core.h>` and call
+`ds_theme_apply(&DS_THEME_EXECUTE)`. For Rust, call
+`context.set_theme(BuiltinTheme::Execute)` on an acquired `Displacer` context.
+These choices preserve Clay as the initial native theme and Rust default.
+
+The manifest supplies pill button radii, square form controls and cards, and
+1px borders to the basic web components that consume `shape`. Other components
+and native applications apply the theme's geometry in their own layouts.
+
+The [Execute specification](../spec/themes/execute.md) distinguishes the corporate
+site's structural grid and decorative rules from control boundaries, and lists
+the adjusted surface, text, and semantic colors used by application UI.
+
 ## Optional developer console integration
 
 `ds-dev-console` is a UI prefab, not a backend server. It defaults to the
@@ -124,3 +168,16 @@ cover canvas behavior, themes, fonts, and ownership constraints. A web build
 checks types and bundling; use the showcase in a browser to inspect visual,
 keyboard, and focus behavior. A successful build does not establish full
 cross-platform or cross-implementation parity.
+
+### Execute component preview
+
+Run the web showcase and open `execute.html` to compare Execute with Displacer
+Dark on the same buttons, inputs, cards, and color roles. Execute is also listed
+in the main showcase's theme selector.
+
+Web manifests can opt into `shape` overrides (`buttonRadius`, `controlRadius`,
+`cardRadius`, `borderWidth`), a `fonts.control` stack, and `colors.fgInverse` for
+labels on filled controls. The basic button, input, select, textarea, and card
+components consume the corresponding properties. Applying another theme clears
+optional font, inverse-color, and shape overrides that it omits. Other components
+retain their own geometry; this is not a global CSS reset.

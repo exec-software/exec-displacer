@@ -73,6 +73,18 @@ const ds_theme DS_THEME_CLAY = {
   .jewels = {0xf2661a, 0x5ea8e8, 0x6cc07f, 0xe05252, 0xe3b341, 0x33b7a6, 0x6e6a65}
 };
 
+/* Execute Software: cool near-black surfaces with a lime action accent. */
+const ds_theme DS_THEME_EXECUTE = {
+  .page = 0x07090b, .surface = 0x0d1115, .surface_alt = 0x141a1f, .raised = 0x171e24,
+  .fg = 0xedf2f5, .fg_muted = 0x7b8790, .fg_subtle = 0x667581,
+  .border = 0x667581, .border_muted = 0x202830,
+  .primary = 0xb8ff3d, .primary_hover = 0xcbff73,
+  .accent = 0xedf2f5, .accent_hover = 0xffffff,
+  .semantic_info = 0x8ac9e8, .semantic_success = 0x8ddb9a,
+  .semantic_warning = 0xffb547, .semantic_error = 0xff7d87,
+  .jewels = {0xb8ff3d, 0x8ac9e8, 0x8ddb9a, 0xff7d87, 0xffb547, 0x6e9a29, 0x7b8790}
+};
+
 static ds_theme applied_theme;
 const ds_theme* ds_current_theme = &DS_THEME_CLAY;
 
@@ -195,6 +207,7 @@ void ds_lang_init(void) {
   _lang_string(DS_LANG_EN, "theme.parchment", "Parchment");
   _lang_string(DS_LANG_EN, "theme.mystic", "Mystic");
   _lang_string(DS_LANG_EN, "theme.clay", "Clay");
+  _lang_string(DS_LANG_EN, "theme.execute", "Execute");
 
   /* German */
   _lang_string(DS_LANG_DE, "common.save", "Speichern");

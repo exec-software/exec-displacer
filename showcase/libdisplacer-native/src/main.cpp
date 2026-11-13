@@ -1,7 +1,7 @@
 /**
  * Displacer Native Sandbox — Interactive Component Showcase
  * All widgets rendered with bitmap font. Mouse/keyboard interactive.
- * SPACE to navigate pages, ESC to quit, 1-6 themes, L language.
+ * SPACE to navigate pages, ESC to quit, 1-7 themes, L language.
  */
 
 #include <cstdio>
@@ -198,7 +198,8 @@ void render_showcase(ds_canvas* c) {
     state.active_theme == 1 ? _("theme.dark") :
     state.active_theme == 2 ? _("theme.arcana") :
     state.active_theme == 3 ? _("theme.parchment") :
-    state.active_theme == 4 ? _("theme.mystic") : _("theme.clay"),
+    state.active_theme == 4 ? _("theme.mystic") :
+    state.active_theme == 5 ? _("theme.clay") : _("theme.execute"),
     ds_lang_active() == DS_LANG_DE ? "DE" :
     ds_lang_active() == DS_LANG_RO ? "RO" :
     ds_lang_active() == DS_LANG_RU ? "RU" :
@@ -248,7 +249,7 @@ void render_showcase(ds_canvas* c) {
   render_table(c, rc[3].bounds.x, rc[3].bounds.y + 14, rc[3].bounds.w);
 
   ds_canvas_fill_rect(c, 0, Hf - 20, Wf, 20, ds_colorf_hex(t->surface));
-  ds_font_text(c, "  SPACE/LEFT/RIGHT navigate  |  ESC quit  |  1-4: Theme  |  L: Lang  |  Click: interact", 8, Hf - 15, ds_colorf_hex(t->fg_subtle));
+  ds_font_text(c, "  SPACE/LEFT/RIGHT navigate  |  ESC quit  |  1-7: Theme  |  L: Lang  |  Click: interact", 8, Hf - 15, ds_colorf_hex(t->fg_subtle));
 }
 
 /* ─── Page 3: extras ─── */
@@ -529,6 +530,9 @@ int main(int argc, char** argv) {
         }
         if (ev.key.keysym.sym == SDLK_6) {
           ds_theme_apply(&DS_THEME_CLAY); state.active_theme = 5;
+        }
+        if (ev.key.keysym.sym == SDLK_7) {
+          ds_theme_apply(&DS_THEME_EXECUTE); state.active_theme = 6;
         }
         if (ev.key.keysym.sym == SDLK_l) ds_lang_set((ds_lang_active() + 1) % 6);
       } else if (ev.type == SDL_MOUSEMOTION) {

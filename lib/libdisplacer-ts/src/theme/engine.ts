@@ -8,6 +8,8 @@
 export interface ThemeColors {
   page: string; surface: string; surfaceAlt: string; raised: string
   fg: string; fgMuted: string; fgSubtle: string
+  /** Label color on primary/accent fills; omitted themes keep component defaults. */
+  fgInverse?: string
   border: string; borderMuted: string
   primary: string; primaryHover: string
   accent: string; accentHover: string
@@ -16,8 +18,13 @@ export interface ThemeColors {
 }
 
 export interface ThemeFonts {
-  display?: string; heading?: string; body?: string; mono?: string; accent?: string
+  display?: string; heading?: string; body?: string; mono?: string; accent?: string; control?: string
   imports?: string[]
+}
+
+/** Optional geometry consumed by the basic button, form and card components. */
+export interface ThemeShape {
+  buttonRadius?: string; controlRadius?: string; cardRadius?: string; borderWidth?: string
 }
 
 export interface ThemeAudio {
@@ -34,6 +41,7 @@ export interface ThemeManifest {
   author?: string; description?: string
   colors: ThemeColors
   fonts?: ThemeFonts
+  shape?: ThemeShape
   audio?: ThemeAudio
   shaders?: ThemeShaders
 }
@@ -47,10 +55,26 @@ export function applyTheme(theme: ThemeManifest): void {
     '--ds-fg-default': c.fg, '--ds-fg-muted': c.fgMuted, '--ds-fg-subtle': c.fgSubtle,
     '--ds-border': c.border, '--ds-border-muted': c.borderMuted,
     '--ds-primary': c.primary, '--ds-primary-hover': c.primaryHover,
+    '--ds-primary-muted': `color-mix(in srgb, ${c.primary} 14%, transparent)`,
     '--ds-accent': c.accent, '--ds-accent-hover': c.accentHover,
+    '--ds-accent-muted': `color-mix(in srgb, ${c.accent} 8%, transparent)`,
     '--ds-info': c.semanticInfo, '--ds-success': c.semanticSuccess, '--ds-warning': c.semanticWarning, '--ds-error': c.semanticError,
   }
   for (const [key, val] of Object.entries(props)) root.style.setProperty(key, val)
+
+  // Clear optional overrides when switching back to a theme that omits them.
+  const optional: Record<string, string | undefined> = {
+    '--ds-fg-inverse': c.fgInverse,
+    '--ds-button-radius': theme.shape?.buttonRadius,
+    '--ds-control-radius': theme.shape?.controlRadius,
+    '--ds-card-radius': theme.shape?.cardRadius,
+    '--ds-border-width': theme.shape?.borderWidth,
+  }
+  for (const [key, val] of Object.entries(optional)) {
+    if (val) root.style.setProperty(key, val)
+    else root.style.removeProperty(key)
+  }
+  root.style.setProperty('--ds-focus-ring', c.primary)
 
   if (theme.fonts?.imports) {
     for (const url of theme.fonts.imports) {
@@ -60,10 +84,10 @@ export function applyTheme(theme: ThemeManifest): void {
       }
     }
   }
-  if (theme.fonts) {
-    for (const [key, val] of Object.entries(theme.fonts)) {
-      if (key !== 'imports' && val) root.style.setProperty(`--ds-font-${key}`, val)
-    }
+  for (const key of ['display', 'heading', 'body', 'mono', 'accent', 'control'] as const) {
+    const value = theme.fonts?.[key]
+    if (value) root.style.setProperty(`--ds-font-${key}`, value)
+    else root.style.removeProperty(`--ds-font-${key}`)
   }
   root.dataset.dsTheme = theme.id
   localStorage.setItem('ds-active-theme', theme.id)

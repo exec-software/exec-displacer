@@ -8,12 +8,13 @@ the visual language and its intended interaction patterns.
 
 | Reference | Contents |
 | --- | --- |
-| [Color tokens](tokens/colors.json) | Light, dark, Mystic, Clay, and Clay Light palettes |
+| [Color tokens](tokens/colors.json) | Light, dark, Mystic, Clay, Clay Light, and Execute palettes |
 | [Typography tokens](tokens/typography.json) | Font stacks, weights, and type scale |
 | [Spacing, motion, and shadows](tokens/spacing-motion-shadows.json) | Layout units, timing, curves, and elevation |
 | [Clay](themes/clay.md) | Default charcoal, orange, and teal theme |
 | [Clay Light](themes/clay-light.md) | Warm-white counterpart to Clay; currently web only |
 | [Mystic](themes/mystic.md) | Graphite surfaces with violet focus |
+| [Execute](themes/execute.md) | Corporate charcoal and lime theme for technical workspaces |
 | [Iconography](iconography/README.md) | Available SVG assets and style rules |
 | [Figma assets](figma/README.md) | Token export and integration status |
 

@@ -1,9 +1,11 @@
 # Figma assets
 
-[tokens-for-figma.json](tokens-for-figma.json) is a static export of the original
-light and dark palettes, typography, spacing, radii, and shadows. It uses a
-`global` token set with `value` and `type` fields. Adapt or import this data with
-a token tool that supports that format.
+[tokens-for-figma.json](tokens-for-figma.json) contains a static export of the original
+light and dark palettes, typography, spacing, radii, and shadows in the `global`
+token set. A separate `execute` set contains the [Execute theme](../themes/execute.md)
+color and font roles. Both sets use `value` and `type` fields; import the set
+your design needs with a token tool that supports that format. The Execute set
+does not replace the original global values.
 
 The export does not include every palette or value in the current
 [source tokens](../tokens/). In particular, Clay, Clay Light, and Mystic are defined in

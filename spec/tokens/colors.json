@@ -241,6 +241,54 @@
           "citrine": "#1e6a60",
           "quartz": "#625e5a"
         }
+      },
+
+      "execute": {
+        "description": "Execute Software's corporate engineering palette, adapted for accessible application controls and dense workspaces.",
+        "bg": {
+          "page": "#07090b",
+          "surface": "#0d1115",
+          "surface-alt": "#141a1f",
+          "raised": "#171e24"
+        },
+        "fg": {
+          "default": "#edf2f5",
+          "muted": "#7b8790",
+          "subtle": "#667581",
+          "inverse": "#07090b"
+        },
+        "border": {
+          "default": "#667581",
+          "muted": "#202830",
+          "focus": "#b8ff3d"
+        },
+        "primary": {
+          "default": "#b8ff3d",
+          "hover": "#cbff73",
+          "active": "#daff9c",
+          "muted": "rgba(184, 255, 61, 0.14)"
+        },
+        "accent": {
+          "default": "#edf2f5",
+          "hover": "#ffffff",
+          "active": "#d8e2e8",
+          "muted": "rgba(237, 242, 245, 0.08)"
+        },
+        "semantic": {
+          "info": "#8ac9e8",
+          "success": "#8ddb9a",
+          "warning": "#ffb547",
+          "error": "#ff7d87"
+        },
+        "jewel": {
+          "amethyst": "#b8ff3d",
+          "sapphire": "#8ac9e8",
+          "emerald": "#8ddb9a",
+          "ruby": "#ff7d87",
+          "topaz": "#ffb547",
+          "citrine": "#6e9a29",
+          "quartz": "#7b8790"
+        }
       }
     }
   }
